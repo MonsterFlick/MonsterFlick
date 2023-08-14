@@ -4,9 +4,7 @@
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=monsterflick&label=Profile%20views&color=0e75b6&style=flat" alt="monsterflick" /> </p>
 
-- 🌱 I’m currently learning **Python,JS,HTML,CSS**
-
-- 👨‍💻 All of my projects are available at [https://monsterflick.netlify.app/](https://monsterflick.netlify.app/)
+- 🌱 I’m currently learning **Data Science**
 
 - 📫 How to reach me **omthakur2366@gmail.com**
 
