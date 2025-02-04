@@ -14,19 +14,16 @@
 - **Databases:** MySQL, PostgreSQL, MongoDB
 
 #### Projects
-- **[Project 1](https://github.com/MonsterFlick/project1):** Brief description of the project, its purpose, and technologies used.
-- **[Project 2](https://github.com/MonsterFlick/project2):** Brief description of the project, its purpose, and technologies used.
-- **[Project 3](https://github.com/MonsterFlick/project3):** Brief description of the project, its purpose, and technologies used.
+- **[Project 1](https://github.com/MonsterFlick/project1):** 
+- **[Project 2](https://github.com/MonsterFlick/project2):**
+- **[Project 3](https://github.com/MonsterFlick/project3):** 
 
 #### Get in Touch
 - **Email:** [monsterflick@example.com](mailto:monsterflick@example.com)
 - **LinkedIn:** [LinkedIn Profile](https://www.linkedin.com/in/monsterflick)
 - **Twitter:** [@MonsterFlick](https://twitter.com/MonsterFlick)
 
-#### Fun Fact
-- I can solve a Rubik's cube in under a minute! 🧩
-
----
+![Cute Cat GIF](https://media.tenor.com/GmDk5mBQ6FkAAAAC/cute-cat-saneking.gif)
 
 ![MonsterFlick's GitHub Stats](https://github-readme-stats.vercel.app/api?username=MonsterFlick&show_icons=true&theme=radical)
 
