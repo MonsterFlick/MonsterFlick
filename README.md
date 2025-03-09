@@ -1,4 +1,4 @@
-### Hi there 👋, I'm MonsterFlick!
+### Hi there 👋, I'm Om Thakur!
 
 ---
 
