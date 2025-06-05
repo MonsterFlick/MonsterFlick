@@ -64,6 +64,9 @@
 
 ---
 
+<h2 align="center">🐍 GitHub Activity Snake</h2>
+
 <p align="center">
-  <img src="https://raw.githubusercontent.com/MonsterFlick/MonsterFlick/output/github-contribution-grid-snake.svg" alt="snake gif" />
+  <img src="https://github.com/MonsterFlick/MonsterFlick/blob/output/github-contribution-grid-snake.svg" alt="Snake animation" />
 </p>
+
