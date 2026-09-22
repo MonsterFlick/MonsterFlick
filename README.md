@@ -2,117 +2,77 @@
 
 # OM THAKUR
 
-**Software Engineer · AI Systems · Backend · DevOps**
+### Software Engineer · AI · Backend · DevOps
 
-Building production software, AI systems, automation, and developer tools.
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=19&duration=3000&pause=1000&color=8B5CF6&center=true&vCenter=true&width=650&lines=Building+software+that+actually+ships;AI+%7C+Backend+%7C+DevOps+%7C+Automation;Turning+ideas+into+working+products" />
 
-<p>
-  <a href="https://omthakur.in">
-    <img src="https://img.shields.io/badge/Portfolio-111111?style=for-the-badge&logo=vercel&logoColor=white" />
-  </a>
-  <a href="https://blogs.omthakur.in">
-    <img src="https://img.shields.io/badge/Blog-111111?style=for-the-badge&logo=hashnode&logoColor=white" />
-  </a>
-  <a href="https://linkedin.com/in/omthakur2366">
-    <img src="https://img.shields.io/badge/LinkedIn-111111?style=for-the-badge&logo=linkedin&logoColor=white" />
-  </a>
-  <a href="mailto:omthakur2366@gmail.com">
-    <img src="https://img.shields.io/badge/Email-111111?style=for-the-badge&logo=gmail&logoColor=white" />
-  </a>
-</p>
+<br>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&height=180&color=0:0f172a,50:4f46e5,100:10b981&text=BUILD.%20SHIP.%20REPEAT.&fontColor=ffffff&fontSize=42&fontAlignY=45&animation=fadeIn" width="100%" />
+<a href="https://omthakur.in">
+<img src="https://img.shields.io/badge/Portfolio-111111?style=for-the-badge&logo=vercel&logoColor=white">
+</a>
+<a href="https://sowebuild.in">
+<img src="https://img.shields.io/badge/SoWeBuild-111111?style=for-the-badge&logo=rocket&logoColor=white">
+</a>
+<a href="https://blogs.omthakur.in">
+<img src="https://img.shields.io/badge/Blog-111111?style=for-the-badge&logo=hashnode&logoColor=white">
+</a>
+<a href="https://linkedin.com/in/omthakur2366">
+<img src="https://img.shields.io/badge/LinkedIn-111111?style=for-the-badge&logo=linkedin&logoColor=white">
+</a>
+
+<br><br>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&height=130&section=header&color=0:0f172a,50:4f46e5,100:10b981&animation=fadeIn" width="100%">
 
 </div>
 
-## About
+I’m a software engineer interested in **AI, backend systems, DevOps, and building products**.
 
-I enjoy building systems end-to-end — from **product architecture and APIs to databases, infrastructure, and deployment**.
+I like working on projects end to end, from writing the first lines of code to setting up the database, infrastructure, deployment, and everything in between.
 
-Currently focused on **AI applications, backend architecture, voice AI, automation, and developer infrastructure**.
+I also run **[SoWeBuild.in](https://sowebuild.in)**, where we build websites, software, AI solutions, and automation for businesses.
 
-## What I Build
+Outside of work, I’m usually experimenting with new technologies or working on something of my own.
 
-| AI & Voice             | Backend & Infrastructure         |
-| :--------------------- | :------------------------------- |
-| AI Applications        | High-performance APIs            |
-| Voice AI Systems       | PostgreSQL & distributed systems |
-| Local LLM Applications | Docker & Linux infrastructure    |
-| Agent Workflows        | Cloud & self-hosted deployments  |
-| AI Automation          | Developer tooling                |
+---
 
-## Tech Stack
+## SoWeBuild
 
-**Languages**
+### [SoWeBuild.in](https://sowebuild.in)
 
-![TypeScript](https://img.shields.io/badge/TypeScript-111111?style=flat-square\&logo=typescript)
-![JavaScript](https://img.shields.io/badge/JavaScript-111111?style=flat-square\&logo=javascript)
-![Python](https://img.shields.io/badge/Python-111111?style=flat-square\&logo=python)
+We build **websites, software, AI solutions, and automation** for businesses.
 
-**Frontend & Mobile**
+From business websites to custom software and AI-powered systems.
 
-![React](https://img.shields.io/badge/React-111111?style=flat-square\&logo=react)
-![Next.js](https://img.shields.io/badge/Next.js-111111?style=flat-square\&logo=nextdotjs)
-![Tailwind](https://img.shields.io/badge/Tailwind-111111?style=flat-square\&logo=tailwindcss)
-![Expo](https://img.shields.io/badge/Expo-111111?style=flat-square\&logo=expo)
+**Build → Launch → Scale**
 
-**Backend & Data**
+---
 
-![Node.js](https://img.shields.io/badge/Node.js-111111?style=flat-square\&logo=nodedotjs)
-![FastAPI](https://img.shields.io/badge/FastAPI-111111?style=flat-square\&logo=fastapi)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-111111?style=flat-square\&logo=postgresql)
-![Supabase](https://img.shields.io/badge/Supabase-111111?style=flat-square\&logo=supabase)
-
-**Infrastructure & AI**
-
-![Docker](https://img.shields.io/badge/Docker-111111?style=flat-square\&logo=docker)
-![Linux](https://img.shields.io/badge/Linux-111111?style=flat-square\&logo=linux)
-![Cloudflare](https://img.shields.io/badge/Cloudflare-111111?style=flat-square\&logo=cloudflare)
-![Ollama](https://img.shields.io/badge/Ollama-111111?style=flat-square)
-![OpenAI](https://img.shields.io/badge/OpenAI-111111?style=flat-square)
-![Gemini](https://img.shields.io/badge/Gemini-111111?style=flat-square)
-![Qdrant](https://img.shields.io/badge/Qdrant-111111?style=flat-square)
-
-## Current Focus
+## What I Work With
 
 ```text
-AI Applications       ████████████████████████████░░
-Backend Architecture  ██████████████████████████░░░
-Voice AI              ████████████████████████░░░░░
-Mobile Development    ███████████████████████░░░░░░
-DevOps                ██████████████████████░░░░░░░
-Open Source           ████████████████████░░░░░░░░░
+TypeScript     JavaScript     Python
+React          Next.js        Node.js
+PostgreSQL     Supabase       Prisma
+Docker         Linux          Cloudflare
+Ollama         OpenAI         Gemini
+Qdrant         Whisper        Pipecat
 ```
 
-## Currently Building
-
-**Personal Assistant**
-
-An AI-powered productivity platform combining:
-
-`Finance` · `Calendar` · `Habits` · `SMS Intelligence` · `Notes` · `AI Assistant`
-
-**Voice AI**
-
-Production-oriented voice systems using:
-
-`LiveKit` · `Pipecat` · `Whisper` · `STT` · `TTS` · `Telephony` · `Local LLMs`
-
-**Automation**
-
-Developer tools and AI workflows designed to eliminate repetitive work.
+---
 
 ## GitHub
 
 <div align="center">
 
-<img height="165" src="https://github-readme-stats.vercel.app/api?username=MonsterFlick&show_icons=true&hide_border=true&bg_color=00000000&title_color=8b5cf6&icon_color=10b981&text_color=c9d1d9" />
+<a href="https://github.com/MonsterFlick">
+  <img src="https://img.shields.io/badge/GitHub-MonsterFlick-111111?style=for-the-badge&logo=github&logoColor=white">
+</a>
 
-<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=MonsterFlick&layout=compact&hide_border=true&bg_color=00000000&title_color=8b5cf6&text_color=c9d1d9" />
+<br><br>
 
-<br>
-
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=MonsterFlick&theme=github-compact&hide_border=true&radius=10" width="95%" />
+<img src="https://komarev.com/ghpvc/?username=MonsterFlick&style=for-the-badge&color=7c3aed">
 
 </div>
 
@@ -120,12 +80,12 @@ Developer tools and AI workflows designed to eliminate repetitive work.
 
 <div align="center">
 
-**Build. Ship. Improve. Repeat.**
+### Build. Ship. Improve. Repeat.
 
-<a href="https://omthakur.in">Portfolio</a> · <a href="https://blogs.omthakur.in">Blog</a> · <a href="https://linkedin.com/in/omthakur2366">LinkedIn</a> · <a href="mailto:omthakur2366@gmail.com">Email</a>
-
-<br><br>
-
-<img src="https://komarev.com/ghpvc/?username=MonsterFlick&style=for-the-badge&color=7c3aed" />
+<a href="https://omthakur.in">Portfolio</a>
+· <a href="https://sowebuild.in">SoWeBuild</a>
+· <a href="https://blogs.omthakur.in">Blog</a>
+· <a href="https://linkedin.com/in/omthakur2366">LinkedIn</a>
+· <a href="mailto:omthakur2366@gmail.com">Email</a>
 
 </div>
