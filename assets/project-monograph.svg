@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="580" height="272" viewBox="0 0 580 272" role="img" aria-labelledby="title"><title id="title">Read the full interactive monograph at omthakur.in</title><style>
+.serif{font-family:'Playfair Display', Georgia, 'Times New Roman', serif}
+.mono{font-family:'Geist Mono', 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace}
+.sans{font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif}
+.rise{animation:rise .9s cubic-bezier(.22,1,.36,1) both}
+.fade{animation:fade 1.1s ease both}
+.draw{animation:draw 1.6s cubic-bezier(.65,0,.35,1) both}
+.pulse{animation:pulse 2.4s ease-in-out infinite}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes draw{from{stroke-dashoffset:var(--len)}to{stroke-dashoffset:0}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+
+.shine{animation:shine 3.6s ease-in-out 1.2s infinite}
+@keyframes shine{0%{transform:translateX(-140px)}60%,100%{transform:translateX(320px)}}
+</style><defs>
+      <linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+      <clipPath id="btn"><rect x="28" y="172" width="232" height="44" rx="8"/></clipPath>
+    </defs><rect x="1" y="1" width="578" height="270" rx="12" fill="#1A1816" stroke="#1A1816"/><rect x="9" y="9" width="562" height="254" rx="8" fill="none" stroke="#4A4541" stroke-dasharray="1 5" stroke-linecap="round"/><g class="rise"><circle cx="34" cy="40" r="3.5" fill="#E07A5F"/><circle cx="34" cy="40" r="3.5" fill="none" stroke="#E07A5F" stroke-width="1.5"><animate attributeName="r" values="3.5;11.2" dur="2.2s" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0" dur="2.2s" begin="0s" repeatCount="indefinite"/></circle><text x="46" y="44" class="mono" font-size="11" fill="#E07A5F" font-weight="700" text-anchor="start" letter-spacing="2.2">CONTINUE READING</text><text x="552" y="44" class="mono" font-size="11" fill="#D6D3D1" font-weight="700" text-anchor="end" letter-spacing="2.2">VOL. I</text><text x="28" y="90" class="serif" font-size="30" fill="#FAF6F1" font-weight="800" text-anchor="start">The full monograph</text><text x="28" y="120" class="sans" font-size="14.5" fill="#D6D3D1" font-weight="400" text-anchor="start">Ten chapters, live device telemetry, architecture blueprints,</text><text x="28" y="142" class="sans" font-size="14.5" fill="#D6D3D1" font-weight="400" text-anchor="start">code specimens and an engineering FAQ — bound into an</text><text x="28" y="164" class="sans" font-size="14.5" fill="#D6D3D1" font-weight="400" text-anchor="start">interactive 3D book.</text></g><g class="fade" style="animation-delay:0.5s"><rect x="28" y="172" width="232" height="44" rx="8" fill="#9E3D2B"/><g clip-path="url(#btn)"><rect class="shine" x="28" y="172" width="90" height="44" fill="url(#g)"/></g><text x="144" y="199" class="mono" font-size="13" fill="#FAF6F1" font-weight="700" text-anchor="middle">Open omthakur.in  →</text><text x="552" y="199" class="mono" font-size="10.5" fill="#D6D3D1" font-weight="600" text-anchor="end" letter-spacing="1.4">10 CHAPTERS · 3D BOOK</text></g><line x1="28" y1="232" x2="552" y2="232" stroke="#4A4541" stroke-width="1" stroke-linecap="round" class="draw" stroke-dasharray="524" style="--len:524;animation-delay:0.3s"/><text x="28" y="255" class="mono fade" font-size="10.5" fill="#D6D3D1" font-weight="600" text-anchor="start" letter-spacing="1.6" style="animation-delay:0.7s">RESUME · LLMS.TXT · OKF BUNDLE</text><text x="552" y="255" class="mono fade" font-size="11" fill="#E07A5F" font-weight="700" text-anchor="end" style="animation-delay:0.7s">↗ omthakur.in</text></svg>

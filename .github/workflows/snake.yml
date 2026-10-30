@@ -1,22 +1,33 @@
-name: Generate Snake Animation
+# Draws the contribution grid as a terracotta snake "reading" the year,
+# using the same paper & terracotta palette as omthakur.in.
+# Output is published to the `output` branch and referenced from README.md.
+name: Generate contribution snake
 
 on:
   schedule:
-    - cron: "0 0 * * *" # runs every day at midnight
+    - cron: "0 */12 * * *"
   workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
 
 jobs:
   generate:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: Platane/snk@v3
+      - name: Generate snake SVG
+        uses: Platane/snk@v3
         with:
           github_user_name: MonsterFlick
           outputs: |
+            dist/github-snake.svg?color_snake=#9E3D2B&color_dots=#EDE4D9,#E2D5C6,#D9A593,#C4604A,#9E3D2B
             dist/github-contribution-grid-snake.svg
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark
 
-      - name: Push to output branch
+      - name: Publish to output branch
         uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: output

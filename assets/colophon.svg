@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="252" viewBox="0 0 1200 252" role="img" aria-labelledby="title"><title id="title">Colophon — signed, Om Thakur</title><style>
+.serif{font-family:'Playfair Display', Georgia, 'Times New Roman', serif}
+.mono{font-family:'Geist Mono', 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace}
+.sans{font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif}
+.rise{animation:rise .9s cubic-bezier(.22,1,.36,1) both}
+.fade{animation:fade 1.1s ease both}
+.draw{animation:draw 1.6s cubic-bezier(.65,0,.35,1) both}
+.pulse{animation:pulse 2.4s ease-in-out infinite}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes draw{from{stroke-dashoffset:var(--len)}to{stroke-dashoffset:0}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+
+.sig{stroke-dasharray:1400;animation:sig 3.2s cubic-bezier(.65,0,.35,1) .3s both,sigfill 1s ease 2.7s both}
+@keyframes sig{from{stroke-dashoffset:1400}to{stroke-dashoffset:0}}
+@keyframes sigfill{from{fill-opacity:0}to{fill-opacity:1}}
+</style><rect x="1" y="1" width="1198" height="250" rx="12" fill="#FAF6F1" stroke="#EDE4D9" stroke-width="1.5"/><rect x="9" y="9" width="1182" height="234" rx="8" fill="none" stroke="#D4C3AF" stroke-opacity=".55" stroke-dasharray="1 5" stroke-linecap="round"/><line x1="462" y1="48" x2="584" y2="48" stroke="#D4C3AF" stroke-width="1.2" stroke-linecap="round" class="draw" stroke-dasharray="122" style="--len:122;animation-delay:0.1s"/><rect x="596" y="44" width="8" height="8" fill="#9E3D2B" transform="rotate(45 600 48)" class="pulse"/><line x1="616" y1="48" x2="738" y2="48" stroke="#D4C3AF" stroke-width="1.2" stroke-linecap="round" class="draw" stroke-dasharray="122" style="--len:122;animation-delay:0.1s"/><text x="600" y="86" class="mono fade" font-size="11" fill="#9E3D2B" font-weight="700" text-anchor="middle" letter-spacing="4">COLOPHON</text><text x="600" y="158" class="serif sig" font-size="58" font-weight="700" font-style="italic" text-anchor="middle" fill="#9E3D2B" stroke="#9E3D2B" stroke-width="1.1">Om Thakur</text><text x="600" y="198" class="mono fade" font-size="11" fill="#4A4541" font-weight="600" text-anchor="middle" letter-spacing="1.2" style="animation-delay:1.2s">Set in Playfair Display &amp; Geist Mono  ·  Composed in Mumbai  ·  Edition MMXXVI</text><text x="600" y="224" class="serif fade" font-size="16" fill="#383432" font-weight="400" text-anchor="middle" font-style="italic" style="animation-delay:1.6s">Thank you for reading this volume.</text></svg>
