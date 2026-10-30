@@ -755,7 +755,6 @@ function buildExperience() {
         ? ping(64, y + 8, C.olive, 6.5)
         : `<circle cx="64" cy="${y + 8}" r="7" fill="${C.card}" stroke="${C.terracotta}" stroke-width="2.5"/><circle cx="64" cy="${y + 8}" r="2.8" fill="${C.terracotta}"/>`;
 
-      // Only display the pill for the current live role. Do not show duration counts for past roles.
       let badgeMarkup = "";
       if (e.current && e.tag) {
         const tagW = monoW(e.tag, 11, 1.4) + 36;
@@ -798,7 +797,102 @@ function buildExperience() {
 }
 
 // ─────────────────────────────────────────────────────────────
-//  7. COLOPHON
+//  7. LIVE TELEMETRY & REPOSITORY SPECIMEN (100% self-contained SVG)
+//  Replaces brittle third-party services that return 402/503.
+// ─────────────────────────────────────────────────────────────
+function buildTelemetry() {
+  const W = 1200;
+  const H = 380;
+
+  const anim = (attr, a, b, d = "0.4s") =>
+    `<animate attributeName="${attr}" values="${a};${b}" keyTimes="0;1" calcMode="spline" keySplines=".22 1 .36 1" dur="1.8s" begin="${d}" fill="freeze"/>`;
+
+  const body =
+    frame(W, H) +
+    // Top banner
+    t(36, 42, "CHAPTER 06 · LIVE TELEMETRY", { cls: "mono rise", size: 12, weight: 700, ls: 3, fill: C.terracotta }) +
+    diamond(266, 38, 6, C.terracotta, "pulse") +
+    t(282, 42, "CODEBASE SIGNALS & REPOSITORY SPECIMEN", { cls: "mono rise", size: 11, weight: 600, ls: 2, fill: C.muted }) +
+    ping(1088, 38, C.olive, 4) +
+    t(1104, 42, "LIVE REPOS: 51", { cls: "mono", size: 10.5, weight: 700, ls: 1.6, fill: C.olive }) +
+    line(36, 56, 1164, 56, C.parchment, { drawDelay: 0.25 }) +
+
+    // ── Left Column: Repository Telemetry ──
+    `<rect x="36" y="74" width="536" height="276" rx="8" fill="${C.card}" stroke="${C.parchment}" stroke-width="1.2"/>` +
+    line(36, 74, 150, 74, C.terracotta, { width: 3 }) +
+    t(56, 106, "REPOSITORY METRICS", { cls: "mono", size: 11.5, weight: 700, ls: 2, fill: C.terracotta }) +
+    t(548, 106, "GITHUB.COM/MONSTERFLICK", { cls: "mono", size: 11, weight: 600, ls: 1, fill: C.muted, anchor: "end" }) +
+    line(56, 120, 548, 120, C.rule, { width: 1, dash: "2 5" }) +
+
+    // Stat 1: 51+ Repositories
+    `<g class="rise" style="${delay(0.25)}">` +
+    t(56, 172, "51+", { cls: "serif", size: 48, weight: 900, fill: C.terracotta }) +
+    t(176, 154, "Public Repositories", { cls: "serif", size: 21, weight: 800, fill: C.ink }) +
+    t(176, 176, "Distributed systems, edge APIs, mobile engines & AI automation", { cls: "sans", size: 13.5, fill: C.charcoal }) +
+    `</g>` +
+
+    // Stat 2: 5+ Years
+    `<g class="rise" style="${delay(0.4)}">` +
+    t(56, 242, "5+ Yrs", { cls: "serif", size: 40, weight: 900, fill: C.ink }) +
+    t(194, 226, "Continuous Engineering", { cls: "serif", size: 21, weight: 800, fill: C.ink }) +
+    t(194, 248, "Active commit chronology and deployments since April 2021", { cls: "sans", size: 13.5, fill: C.charcoal }) +
+    `</g>` +
+
+    // Stat 3: Production philosophy
+    line(56, 276, 548, 276, C.rule, { width: 1, dash: "2 5" }) +
+    `<g class="fade" style="${delay(0.6)}">` +
+    ping(68, 308, C.olive, 4) +
+    t(86, 312, "ZERO DATABASE CRASH PHILOSOPHY · STATELESS EDGE APIS", { cls: "mono", size: 10.5, weight: 700, ls: 1.2, fill: C.olive }) +
+    `</g>` +
+
+    // ── Right Column: Language Distribution ──
+    `<rect x="592" y="74" width="572" height="276" rx="8" fill="${C.card}" stroke="${C.parchment}" stroke-width="1.2"/>` +
+    line(592, 74, 706, 74, C.terracotta, { width: 3 }) +
+    t(612, 106, "LANGUAGE SPECIMEN DISTRIBUTION", { cls: "mono", size: 11.5, weight: 700, ls: 2, fill: C.terracotta }) +
+    t(1144, 106, "BY REPOSITORY VOLUME", { cls: "mono", size: 11, weight: 600, ls: 1, fill: C.muted, anchor: "end" }) +
+    line(612, 120, 1144, 120, C.rule, { width: 1, dash: "2 5" }) +
+
+    // Lang 1: TypeScript (54%)
+    `<g class="rise" style="${delay(0.3)}">` +
+    t(612, 146, "TypeScript", { cls: "serif", size: 17, weight: 800, fill: C.ink }) +
+    t(880, 146, "21 Repositories", { cls: "mono", size: 12.5, weight: 600, fill: C.muted }) +
+    t(1144, 146, "54%", { cls: "mono", size: 14, weight: 800, fill: C.terracotta, anchor: "end" }) +
+    `<rect x="612" y="156" width="532" height="12" rx="6" fill="#E8DEC8"/>` +
+    `<rect x="612" y="156" width="287" height="12" rx="6" fill="${C.terracotta}">${anim("width", 0, 287, "0.3s")}</rect>` +
+    `</g>` +
+
+    // Lang 2: JavaScript / Node (24%)
+    `<g class="rise" style="${delay(0.45)}">` +
+    t(612, 196, "JavaScript / Node.js", { cls: "serif", size: 17, weight: 800, fill: C.ink }) +
+    t(880, 196, "10 Repositories", { cls: "mono", size: 12.5, weight: 600, fill: C.muted }) +
+    t(1144, 196, "24%", { cls: "mono", size: 14, weight: 800, fill: C.olive, anchor: "end" }) +
+    `<rect x="612" y="206" width="532" height="12" rx="6" fill="#E8DEC8"/>` +
+    `<rect x="612" y="206" width="128" height="12" rx="6" fill="${C.olive}">${anim("width", 0, 128, "0.45s")}</rect>` +
+    `</g>` +
+
+    // Lang 3: Python & CUDA (12%)
+    `<g class="rise" style="${delay(0.6)}">` +
+    t(612, 246, "Python & CUDA AI", { cls: "serif", size: 17, weight: 800, fill: C.ink }) +
+    t(880, 246, "Real-Time Pipelines", { cls: "mono", size: 12.5, weight: 600, fill: C.muted }) +
+    t(1144, 246, "12%", { cls: "mono", size: 14, weight: 800, fill: C.ember, anchor: "end" }) +
+    `<rect x="612" y="256" width="532" height="12" rx="6" fill="#E8DEC8"/>` +
+    `<rect x="612" y="256" width="64" height="12" rx="6" fill="${C.ember}">${anim("width", 0, 64, "0.6s")}</rect>` +
+    `</g>` +
+
+    // Lang 4: Kotlin & Android (10%)
+    `<g class="rise" style="${delay(0.75)}">` +
+    t(612, 296, "Kotlin & Android", { cls: "serif", size: 17, weight: 800, fill: C.ink }) +
+    t(880, 296, "Offline-First Systems", { cls: "mono", size: 12.5, weight: 600, fill: C.muted }) +
+    t(1144, 296, "10%", { cls: "mono", size: 14, weight: 800, fill: C.burgundy, anchor: "end" }) +
+    `<rect x="612" y="306" width="532" height="12" rx="6" fill="#E8DEC8"/>` +
+    `<rect x="612" y="306" width="53" height="12" rx="6" fill="${C.burgundy}">${anim("width", 0, 53, "0.75s")}</rect>` +
+    `</g>`;
+
+  write("telemetry.svg", svg(W, H, "Live telemetry — repository metrics and language specimen distribution", body));
+}
+
+// ─────────────────────────────────────────────────────────────
+//  8. COLOPHON
 // ─────────────────────────────────────────────────────────────
 function buildColophon() {
   const W = 1200;
@@ -837,13 +931,13 @@ function buildColophon() {
 }
 
 // ─────────────────────────────────────────────────────────────
-//  8. README GENERATOR
+//  9. README GENERATOR (Uses Founder, self-contained telemetry)
 // ─────────────────────────────────────────────────────────────
 function buildReadme() {
   const hex = (c) => c.replace("#", "");
   const typingLines = [
     "Designing low-latency backends that stay up",
-    "Co-founder @ SoWeBuild.in · Web & AI Systems",
+    "Founder of SoWeBuild.in · Web & AI Systems",
     "15 min → 4 s · async message queues",
     "~700 ms · real-time GPU voice pipelines",
     "< 10 ms · stateless Edge APIs",
@@ -854,19 +948,10 @@ function buildReadme() {
     `&color=${hex(C.terracotta)}&center=true&vCenter=true&width=720&height=34&lines=` +
     typingLines.map(encodeURIComponent).join(";");
 
-  const statsTheme = `bg_color=${hex(C.paper)}&title_color=${hex(C.terracotta)}&text_color=${hex(C.charcoal)}&icon_color=${hex(
-    C.olive
-  )}&border_color=${hex(C.rule)}&ring_color=${hex(C.terracotta)}&border_radius=10`;
-  const stats = `https://github-readme-stats.vercel.app/api?username=${USER}&show_icons=true&include_all_commits=true&count_private=true&custom_title=Repository%20Telemetry&${statsTheme}`;
-  const langs = `https://github-readme-stats.vercel.app/api/top-langs/?username=${USER}&layout=compact&langs_count=8&custom_title=Language%20Specimen&${statsTheme}`;
   const streak =
     `https://streak-stats.demolab.com/?user=${USER}&background=${hex(C.paper)}&border=${hex(C.rule)}&stroke=${hex(C.parchment)}` +
     `&ring=${hex(C.terracotta)}&fire=${hex(C.terracotta)}&currStreakNum=${hex(C.ink)}&sideNums=${hex(C.ink)}` +
     `&currStreakLabel=${hex(C.terracotta)}&sideLabels=${hex(C.muted)}&dates=${hex(C.muted)}&border_radius=10`;
-  const graph =
-    `https://github-readme-activity-graph.vercel.app/graph?username=${USER}&bg_color=${hex(C.paper)}&color=${hex(C.muted)}` +
-    `&line=${hex(C.terracotta)}&point=${hex(C.olive)}&area=true&area_color=${hex(C.ember)}&title_color=${hex(C.ink)}` +
-    `&hide_border=false&border_color=${hex(C.rule)}&radius=10&custom_title=Commit%20Chronology`;
   const snake = `https://raw.githubusercontent.com/${USER}/${USER}/output/github-snake.svg`;
   const readers = `https://komarev.com/ghpvc/?username=${USER}&label=READERS%20OF%20THIS%20VOLUME&color=${hex(C.terracotta)}&style=flat-square`;
 
@@ -890,7 +975,7 @@ function buildReadme() {
 </a>
 
 <p align="center">
-  <a href="https://omthakur.in"><img src="${typing}" alt="Designing low-latency backends that stay up · Co-founder @ SoWeBuild.in · 15 min → 4 s async message queues · ~700 ms GPU voice pipelines · under 10 ms Edge APIs" /></a>
+  <a href="https://omthakur.in"><img src="${typing}" alt="Designing low-latency backends that stay up · Founder of SoWeBuild.in · 15 min → 4 s async message queues · ~700 ms GPU voice pipelines · under 10 ms Edge APIs" /></a>
 </p>
 
 <p align="center">
@@ -909,7 +994,7 @@ function buildReadme() {
 **Backend engineer** focused on distributed, database-backed architectures, production reliability, and custom digital systems. I build the parts of an architecture nobody notices until they break — message queues, real-time streaming pipelines, offline-first sync, and the auth & encryption layers in between.
 
 - **Now** — Founding Software Engineer at **Krishora Technologies** (joined Apr 2026), shipping ~700 ms Python/CUDA voice pipelines and Qdrant-backed retrieval for Sevak AI.
-- **Agency** — Co-founder at [**SoWeBuild.in**](https://sowebuild.in) — building high-performance websites, bespoke software, AI systems, and business automation from zero to scale.
+- **Agency** — Founder of [**SoWeBuild.in**](https://sowebuild.in) — building high-performance websites, bespoke software, AI systems, and business automation from zero to scale.
 - **Before** — Encrypted offline queues & legal RAG at **CIARL** (Aug 2025 – Apr 2026); replaced polling crons with Flexbase queues at **Sumeru** (15 min → 4 s).
 - **Writing** — Architecture deep dives on [**GitFool**](https://blogs.omthakur.in), my edge-rendered blog engine.
 - **Open to** — Backend, Distributed Systems & Founding Engineer roles, agency collaborations, and architecture consulting.
@@ -918,7 +1003,7 @@ function buildReadme() {
 // whoami.ts — Chapter 01, Page 03
 const om = {
   role:     "Founding Software Engineer @ Krishora Technologies",
-  agency:   "Co-founder @ SoWeBuild.in (Websites, Software & AI Automation)",
+  agency:   "Founder @ SoWeBuild.in (Websites, Software & AI Automation)",
   focus:    ["distributed systems", "real-time pipelines", "message queues", "applied RAG"],
   stack:    ["TypeScript", "Python", "Kotlin", "PostgreSQL", "Qdrant", "Redis"],
   based:    "Mumbai, IN · IST (UTC+5:30)",
@@ -964,16 +1049,13 @@ ${projectRow(PROJECTS[0], PROJECTS[1])}${projectRow(PROJECTS[2], PROJECTS[3])}${
 
 <img src="./assets/chapter-06.svg" width="100%" alt="Chapter 06 — Live Telemetry" />
 
-<p align="center">
-  <img src="${stats}" height="180" alt="GitHub stats" />
-  <img src="${langs}" height="180" alt="Top languages" />
-</p>
+<img src="./assets/telemetry.svg" width="100%" alt="Repository Telemetry & Language Specimen — 51+ Public Repositories, 5+ Years on GitHub, TypeScript, JavaScript, Python, Kotlin" />
+
+<br /><br />
 
 <p align="center">
-  <img src="${streak}" width="49%" alt="Contribution streak" />
+  <img src="${streak}" width="490" alt="Contribution streak" />
 </p>
-
-<img src="${graph}" width="100%" alt="Contribution activity graph" />
 
 <p align="center">
   <img src="${snake}" width="100%" alt="Contribution grid being read by a terracotta snake" />
@@ -1015,5 +1097,6 @@ PROJECTS.forEach(buildProjectCard);
 buildMonographCard();
 buildStack();
 buildExperience();
+buildTelemetry();
 buildColophon();
 buildReadme();

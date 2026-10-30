@@ -9,7 +9,7 @@
 </a>
 
 <p align="center">
-  <a href="https://omthakur.in"><img src="https://readme-typing-svg.demolab.com/?font=JetBrains+Mono&weight=600&size=17&duration=3000&pause=1100&color=9E3D2B&center=true&vCenter=true&width=720&height=34&lines=Designing%20low-latency%20backends%20that%20stay%20up;Co-founder%20%40%20SoWeBuild.in%20%C2%B7%20Web%20%26%20AI%20Systems;15%20min%20%E2%86%92%204%20s%20%C2%B7%20async%20message%20queues;~700%20ms%20%C2%B7%20real-time%20GPU%20voice%20pipelines;%3C%2010%20ms%20%C2%B7%20stateless%20Edge%20APIs;Open%20to%20Backend%20%26%20Founding%20Engineer%20roles" alt="Designing low-latency backends that stay up · Co-founder @ SoWeBuild.in · 15 min → 4 s async message queues · ~700 ms GPU voice pipelines · under 10 ms Edge APIs" /></a>
+  <a href="https://omthakur.in"><img src="https://readme-typing-svg.demolab.com/?font=JetBrains+Mono&weight=600&size=17&duration=3000&pause=1100&color=9E3D2B&center=true&vCenter=true&width=720&height=34&lines=Designing%20low-latency%20backends%20that%20stay%20up;Founder%20of%20SoWeBuild.in%20%C2%B7%20Web%20%26%20AI%20Systems;15%20min%20%E2%86%92%204%20s%20%C2%B7%20async%20message%20queues;~700%20ms%20%C2%B7%20real-time%20GPU%20voice%20pipelines;%3C%2010%20ms%20%C2%B7%20stateless%20Edge%20APIs;Open%20to%20Backend%20%26%20Founding%20Engineer%20roles" alt="Designing low-latency backends that stay up · Founder of SoWeBuild.in · 15 min → 4 s async message queues · ~700 ms GPU voice pipelines · under 10 ms Edge APIs" /></a>
 </p>
 
 <p align="center">
@@ -28,7 +28,7 @@
 **Backend engineer** focused on distributed, database-backed architectures, production reliability, and custom digital systems. I build the parts of an architecture nobody notices until they break — message queues, real-time streaming pipelines, offline-first sync, and the auth & encryption layers in between.
 
 - **Now** — Founding Software Engineer at **Krishora Technologies** (joined Apr 2026), shipping ~700 ms Python/CUDA voice pipelines and Qdrant-backed retrieval for Sevak AI.
-- **Agency** — Co-founder at [**SoWeBuild.in**](https://sowebuild.in) — building high-performance websites, bespoke software, AI systems, and business automation from zero to scale.
+- **Agency** — Founder of [**SoWeBuild.in**](https://sowebuild.in) — building high-performance websites, bespoke software, AI systems, and business automation from zero to scale.
 - **Before** — Encrypted offline queues & legal RAG at **CIARL** (Aug 2025 – Apr 2026); replaced polling crons with Flexbase queues at **Sumeru** (15 min → 4 s).
 - **Writing** — Architecture deep dives on [**GitFool**](https://blogs.omthakur.in), my edge-rendered blog engine.
 - **Open to** — Backend, Distributed Systems & Founding Engineer roles, agency collaborations, and architecture consulting.
@@ -37,7 +37,7 @@
 // whoami.ts — Chapter 01, Page 03
 const om = {
   role:     "Founding Software Engineer @ Krishora Technologies",
-  agency:   "Co-founder @ SoWeBuild.in (Websites, Software & AI Automation)",
+  agency:   "Founder @ SoWeBuild.in (Websites, Software & AI Automation)",
   focus:    ["distributed systems", "real-time pipelines", "message queues", "applied RAG"],
   stack:    ["TypeScript", "Python", "Kotlin", "PostgreSQL", "Qdrant", "Redis"],
   based:    "Mumbai, IN · IST (UTC+5:30)",
@@ -95,16 +95,13 @@ const om = {
 
 <img src="./assets/chapter-06.svg" width="100%" alt="Chapter 06 — Live Telemetry" />
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=MonsterFlick&show_icons=true&include_all_commits=true&count_private=true&custom_title=Repository%20Telemetry&bg_color=FAF6F1&title_color=9E3D2B&text_color=2C2825&icon_color=566449&border_color=D4C3AF&ring_color=9E3D2B&border_radius=10" height="180" alt="GitHub stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=MonsterFlick&layout=compact&langs_count=8&custom_title=Language%20Specimen&bg_color=FAF6F1&title_color=9E3D2B&text_color=2C2825&icon_color=566449&border_color=D4C3AF&ring_color=9E3D2B&border_radius=10" height="180" alt="Top languages" />
-</p>
+<img src="./assets/telemetry.svg" width="100%" alt="Repository Telemetry & Language Specimen — 51+ Public Repositories, 5+ Years on GitHub, TypeScript, JavaScript, Python, Kotlin" />
+
+<br /><br />
 
 <p align="center">
-  <img src="https://streak-stats.demolab.com/?user=MonsterFlick&background=FAF6F1&border=D4C3AF&stroke=E2D5C6&ring=9E3D2B&fire=9E3D2B&currStreakNum=1A1816&sideNums=1A1816&currStreakLabel=9E3D2B&sideLabels=5A524A&dates=5A524A&border_radius=10" width="49%" alt="Contribution streak" />
+  <img src="https://streak-stats.demolab.com/?user=MonsterFlick&background=FAF6F1&border=D4C3AF&stroke=E2D5C6&ring=9E3D2B&fire=9E3D2B&currStreakNum=1A1816&sideNums=1A1816&currStreakLabel=9E3D2B&sideLabels=5A524A&dates=5A524A&border_radius=10" width="490" alt="Contribution streak" />
 </p>
-
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=MonsterFlick&bg_color=FAF6F1&color=5A524A&line=9E3D2B&point=566449&area=true&area_color=E07A5F&title_color=1A1816&hide_border=false&border_color=D4C3AF&radius=10&custom_title=Commit%20Chronology" width="100%" alt="Contribution activity graph" />
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/MonsterFlick/MonsterFlick/output/github-snake.svg" width="100%" alt="Contribution grid being read by a terracotta snake" />
