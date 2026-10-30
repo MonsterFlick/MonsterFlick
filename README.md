@@ -9,37 +9,40 @@
 </a>
 
 <p align="center">
-  <a href="https://omthakur.in"><img src="https://readme-typing-svg.demolab.com/?font=JetBrains+Mono&weight=600&size=17&duration=3000&pause=1100&color=9E3D2B&center=true&vCenter=true&width=720&height=34&lines=Designing%20low-latency%20backends%20that%20stay%20up;15%20min%20%E2%86%92%204%20s%20%C2%B7%20async%20message%20queues;~700%20ms%20%C2%B7%20real-time%20GPU%20voice%20pipelines;%3C%2010%20ms%20%C2%B7%20stateless%20Edge%20APIs;Open%20to%20Backend%20%26%20Founding%20Engineer%20roles" alt="Designing low-latency backends that stay up · 15 min → 4 s async message queues · ~700 ms GPU voice pipelines · under 10 ms Edge APIs" /></a>
+  <a href="https://omthakur.in"><img src="https://readme-typing-svg.demolab.com/?font=JetBrains+Mono&weight=600&size=17&duration=3000&pause=1100&color=9E3D2B&center=true&vCenter=true&width=720&height=34&lines=Designing%20low-latency%20backends%20that%20stay%20up;Co-founder%20%40%20SoWeBuild.in%20%C2%B7%20Web%20%26%20AI%20Systems;15%20min%20%E2%86%92%204%20s%20%C2%B7%20async%20message%20queues;~700%20ms%20%C2%B7%20real-time%20GPU%20voice%20pipelines;%3C%2010%20ms%20%C2%B7%20stateless%20Edge%20APIs;Open%20to%20Backend%20%26%20Founding%20Engineer%20roles" alt="Designing low-latency backends that stay up · Co-founder @ SoWeBuild.in · 15 min → 4 s async message queues · ~700 ms GPU voice pipelines · under 10 ms Edge APIs" /></a>
 </p>
 
 <p align="center">
-  <a href="https://omthakur.in"><img src="https://img.shields.io/badge/omthakur.in-1A1816?style=for-the-badge&logo=googlechrome&logoColor=E07A5F" alt="Website" /></a>
-  <a href="https://omthakur.in/resume"><img src="https://img.shields.io/badge/Resume-9E3D2B?style=for-the-badge&logo=readthedocs&logoColor=FAF6F1" alt="Resume" /></a>
+  <a href="https://omthakur.in"><img src="https://img.shields.io/badge/omthakur.in-1A1816?style=for-the-badge&logo=googlechrome&logoColor=E07A5F" alt="Portfolio" /></a>
+  <a href="https://sowebuild.in"><img src="https://img.shields.io/badge/SoWeBuild.in-9E3D2B?style=for-the-badge&logo=rocket&logoColor=FAF6F1" alt="SoWeBuild Agency" /></a>
+  <a href="https://omthakur.in/resume"><img src="https://img.shields.io/badge/Resume-1A1816?style=for-the-badge&logo=readthedocs&logoColor=FAF6F1" alt="Resume" /></a>
   <a href="https://blogs.omthakur.in"><img src="https://img.shields.io/badge/GitFool_Blog-566449?style=for-the-badge&logo=rss&logoColor=FAF6F1" alt="Blog" /></a>
   <a href="https://linkedin.com/in/omthakur2366"><img src="https://img.shields.io/badge/LinkedIn-FAF6F1?style=for-the-badge&logo=linkedin&logoColor=0A66C2" alt="LinkedIn" /></a>
-  <a href="https://twitter.com/omthakur2366"><img src="https://img.shields.io/badge/@omthakur2366-EDE4D9?style=for-the-badge&logo=x&logoColor=1A1816" alt="X / Twitter" /></a>
+  <a href="https://twitter.com/omthakur2366"><img src="https://img.shields.io/badge/@omthakur2366-E2D5C6?style=for-the-badge&logo=x&logoColor=1A1816" alt="X / Twitter" /></a>
 </p>
 
 <br />
 
 <img src="./assets/chapter-01.svg" width="100%" alt="Chapter 01 — Preface" />
 
-**Backend engineer** focused on distributed, database-backed architectures and production reliability. I build the parts of a system nobody notices until they break — message queues, real-time streaming pipelines, offline-first sync, and the auth & encryption layers in between.
+**Backend engineer** focused on distributed, database-backed architectures, production reliability, and custom digital systems. I build the parts of an architecture nobody notices until they break — message queues, real-time streaming pipelines, offline-first sync, and the auth & encryption layers in between.
 
-- **Now** — Founding Software Engineer at **Krishora Technologies**, shipping ~700 ms Python/CUDA voice pipelines and Qdrant-backed retrieval for Sevak AI.
-- **Before** — Encrypted offline queues & legal RAG at **CIARL**; replaced polling crons with Flexbase queues at **Sumeru** (15 min → 4 s).
-- **Writing** — architecture deep dives on [**GitFool**](https://blogs.omthakur.in), my edge-rendered blog engine.
-- **Open to** — Backend, Distributed Systems & Founding Engineer roles, and architecture consulting.
+- **Now** — Founding Software Engineer at **Krishora Technologies** (joined Apr 2026), shipping ~700 ms Python/CUDA voice pipelines and Qdrant-backed retrieval for Sevak AI.
+- **Agency** — Co-founder at [**SoWeBuild.in**](https://sowebuild.in) — building high-performance websites, bespoke software, AI systems, and business automation from zero to scale.
+- **Before** — Encrypted offline queues & legal RAG at **CIARL** (Aug 2025 – Apr 2026); replaced polling crons with Flexbase queues at **Sumeru** (15 min → 4 s).
+- **Writing** — Architecture deep dives on [**GitFool**](https://blogs.omthakur.in), my edge-rendered blog engine.
+- **Open to** — Backend, Distributed Systems & Founding Engineer roles, agency collaborations, and architecture consulting.
 
 ```ts
 // whoami.ts — Chapter 01, Page 03
 const om = {
-  role:    "Founding Software Engineer @ Krishora Technologies",
-  focus:   ["distributed systems", "real-time pipelines", "message queues", "applied RAG"],
-  stack:   ["TypeScript", "Python", "Kotlin", "PostgreSQL", "Qdrant", "Redis"],
-  based:   "Mumbai, IN · IST (UTC+5:30)",
-  honours: "First Rank · B.Sc. IT · University of Mumbai (CGPA 8.55/10)",
-  reach:   "omthakur2366@gmail.com",
+  role:     "Founding Software Engineer @ Krishora Technologies",
+  agency:   "Co-founder @ SoWeBuild.in (Websites, Software & AI Automation)",
+  focus:    ["distributed systems", "real-time pipelines", "message queues", "applied RAG"],
+  stack:    ["TypeScript", "Python", "Kotlin", "PostgreSQL", "Qdrant", "Redis"],
+  based:    "Mumbai, IN · IST (UTC+5:30)",
+  honours:  "First Rank · B.Sc. IT · University of Mumbai (CGPA 8.55/10)",
+  reach:    "omthakur2366@gmail.com",
 } as const;
 ```
 
@@ -55,18 +58,24 @@ const om = {
 
 <table>
   <tr>
+    <td width="50%"><a href="https://sowebuild.in"><img src="./assets/project-sowebuild.svg" width="100%" alt="SoWeBuild.in — Digital engineering agency building high-performance websites, bespoke software, AI systems, and business automation from design to cloud deployment." /></a></td>
     <td width="50%"><a href="https://store.sowebuild.in"><img src="./assets/project-commerce.svg" width="100%" alt="Digital Commerce Platform — Dual-verification checkout — a synchronous API check plus a timing-safe HMAC-SHA256 webhook — with AES-256-GCM entitlements encrypted at rest using randomized IVs." /></a></td>
+  </tr>
+  <tr>
     <td width="50%"><a href="https://github.com/MonsterFlick/devpic"><img src="./assets/project-devpic.svg" width="100%" alt="devpic — Open-source, stateless REST API that generates deterministic mathematical SVG meshes on the Next.js Edge Runtime — zero database, zero dependencies, sub-10 ms responses." /></a></td>
-  </tr>
-  <tr>
     <td width="50%"><a href="https://github.com/MonsterFlick/Agni"><img src="./assets/project-agni.svg" width="100%" alt="Agni — Local Windows automation agent powered by Ollama models, with regex command blacklisting, destructive-operation safeguards and a self-repairing, error-driven execution loop." /></a></td>
-    <td width="50%"><a href="https://github.com/MonsterFlick/Fin-Read"><img src="./assets/project-finread.svg" width="100%" alt="Fin Read — Android finance tracker in Kotlin that extracts SMS transactions into a Room database and syncs idempotently to Supabase — fully usable without a network." /></a></td>
   </tr>
   <tr>
+    <td width="50%"><a href="https://github.com/MonsterFlick/Fin-Read"><img src="./assets/project-finread.svg" width="100%" alt="Fin Read — Android finance tracker in Kotlin that extracts SMS transactions into a Room database and syncs idempotently to Supabase — fully usable without a network." /></a></td>
     <td width="50%"><a href="https://blogs.omthakur.in"><img src="./assets/project-gitfool.svg" width="100%" alt="GitFool — Edge-rendered publication engine that compiles markdown straight from GitHub repositories via webhooks — sub-30 ms TTFB and 100/100 Lighthouse scores." /></a></td>
-    <td width="50%"><a href="https://omthakur.in"><img src="./assets/project-monograph.svg" width="100%" alt="The full monograph — Read the interactive engineering monograph at omthakur.in" /></a></td>
   </tr>
 </table>
+
+<br />
+
+<a href="https://omthakur.in">
+  <img src="./assets/project-monograph.svg" width="100%" alt="The full monograph — Read the interactive engineering monograph at omthakur.in" />
+</a>
 
 <br />
 
@@ -79,7 +88,7 @@ const om = {
 <img src="./assets/chapter-05.svg" width="100%" alt="Chapter 05 — Career Chronology" />
 
 <a href="https://omthakur.in/resume">
-  <img src="./assets/experience.svg" width="100%" alt="Krishora Technologies (May 2026 – present), CIARL (Aug 2025 – May 2026), Sumeru Technology Solutions (Aug 2024 – Feb 2025), Bhimrao Pradhan College (Jun – Aug 2024)." />
+  <img src="./assets/experience.svg" width="100%" alt="Krishora Technologies (Apr 2026 – present), CIARL (Aug 2025 – Apr 2026), Sumeru Technology Solutions (Aug 2024 – Feb 2025), Bhimrao Pradhan College (Jun – Aug 2024)." />
 </a>
 
 <br />
@@ -92,10 +101,10 @@ const om = {
 </p>
 
 <p align="center">
-  <img src="https://streak-stats.demolab.com/?user=MonsterFlick&background=FAF6F1&border=D4C3AF&stroke=EDE4D9&ring=9E3D2B&fire=9E3D2B&currStreakNum=1A1816&sideNums=1A1816&currStreakLabel=9E3D2B&sideLabels=4A4541&dates=4A4541&border_radius=10" width="49%" alt="Contribution streak" />
+  <img src="https://streak-stats.demolab.com/?user=MonsterFlick&background=FAF6F1&border=D4C3AF&stroke=E2D5C6&ring=9E3D2B&fire=9E3D2B&currStreakNum=1A1816&sideNums=1A1816&currStreakLabel=9E3D2B&sideLabels=5A524A&dates=5A524A&border_radius=10" width="49%" alt="Contribution streak" />
 </p>
 
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=MonsterFlick&bg_color=FAF6F1&color=4A4541&line=9E3D2B&point=566449&area=true&area_color=E07A5F&title_color=1A1816&hide_border=false&border_color=D4C3AF&radius=10&custom_title=Commit%20Chronology" width="100%" alt="Contribution activity graph" />
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=MonsterFlick&bg_color=FAF6F1&color=5A524A&line=9E3D2B&point=566449&area=true&area_color=E07A5F&title_color=1A1816&hide_border=false&border_color=D4C3AF&radius=10&custom_title=Commit%20Chronology" width="100%" alt="Contribution activity graph" />
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/MonsterFlick/MonsterFlick/output/github-snake.svg" width="100%" alt="Contribution grid being read by a terracotta snake" />
@@ -106,12 +115,13 @@ const om = {
 <img src="./assets/chapter-07.svg" width="100%" alt="Chapter 07 — Correspondence" />
 
 <p align="center">
-  Have a distributed-systems problem, a founding role, or just a good queue story?<br />
+  Have a distributed-systems problem, an agency project for SoWeBuild, a founding role, or just a good queue story?<br />
   <b>Write to me — letters are always answered.</b>
 </p>
 
 <p align="center">
   <a href="mailto:omthakur2366@gmail.com"><img src="https://img.shields.io/badge/omthakur2366@gmail.com-FAF6F1?style=for-the-badge&logo=gmail&logoColor=9E3D2B" alt="Email" /></a>
+  <a href="https://sowebuild.in"><img src="https://img.shields.io/badge/SoWeBuild.in-9E3D2B?style=for-the-badge&logo=rocket&logoColor=FAF6F1" alt="Agency" /></a>
   <a href="https://omthakur.in"><img src="https://img.shields.io/badge/Read_the_Monograph-1A1816?style=for-the-badge&logo=bookstack&logoColor=E07A5F" alt="Portfolio" /></a>
   <a href="https://www.instagram.com/omthakur.op"><img src="https://img.shields.io/badge/Instagram-FAF6F1?style=for-the-badge&logo=instagram&logoColor=A81745" alt="Instagram" /></a>
 </p>

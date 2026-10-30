@@ -1,102 +1,101 @@
-// ─────────────────────────────────────────────────────────────
-//  Om Thakur · GitHub Profile Generator
-//  Editorial "Engineering Monograph" theme — paper, ink & terracotta,
-//  matching https://omthakur.in.
-//
-//  Usage:  node build.mjs
-//  Output: ./assets/*.svg  +  ./README.md
-//
-//  Every SVG is self-contained (no external fonts/scripts), so GitHub's
-//  image proxy renders the CSS + SMIL animations safely. Each card carries
-//  its own paper background, so it reads well in both light & dark mode.
-// ─────────────────────────────────────────────────────────────
+/**
+ * Generator for Om Thakur's GitHub profile ("Engineering Monograph", Vol. I)
+ * Emits pure self-contained SVGs that render through GitHub's camo proxy.
+ *
+ * Theme: warm editorial paper (#FAF6F1 / #FDFCFA), ink (#1A1816), and terracotta (#9E3D2B).
+ *
+ * Run: node build.mjs
+ */
 
-import { writeFileSync, mkdirSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { writeFileSync, mkdirSync } from "fs";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
 
-const ROOT = dirname(fileURLToPath(import.meta.url));
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = __dirname;
 const OUT = join(ROOT, "assets");
 mkdirSync(OUT, { recursive: true });
 
 const USER = "MonsterFlick";
 
-// ── Palette (mirrors app/globals.css on omthakur.in) ──
+// Monograph palette (matches omthakur.in design tokens)
 const C = {
   paper: "#FAF6F1",
   card: "#FDFCFA",
-  ivory: "#F3ECE4",
-  parchment: "#EDE4D9",
-  sand: "#E2D5C6",
+  ivory: "#F4EDE2",
+  sand: "#EDE4D9",
+  parchment: "#E2D5C6",
   rule: "#D4C3AF",
+  borderDark: "#C4AF98",
   ink: "#1A1816",
   charcoal: "#2C2825",
-  body: "#383432",
-  muted: "#4A4541",
+  body: "#3A342E",
+  muted: "#5A524A",
   terracotta: "#9E3D2B",
   ember: "#E07A5F",
+  burgundy: "#7A2E20",
   olive: "#566449",
-  burgundy: "#7A3B3B",
-  mist: "#D6D3D1",
+  oliveDark: "#3E4935",
+  mist: "#A89F91",
 };
 
-const FONTS = {
-  serif: `'Playfair Display', Georgia, 'Times New Roman', serif`,
-  mono: `'Geist Mono', 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace`,
-  sans: `Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif`,
-};
+const esc = (s) =>
+  String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
 
-// Shared animation vocabulary. Default (un-animated) state is always the
-// final, fully visible state — so reduced-motion users still see everything.
+// Standard typographic stylesheet injected into every SVG
 const BASE_CSS = `
-.serif{font-family:${FONTS.serif}}
-.mono{font-family:${FONTS.mono}}
-.sans{font-family:${FONTS.sans}}
-.rise{animation:rise .9s cubic-bezier(.22,1,.36,1) both}
-.fade{animation:fade 1.1s ease both}
-.draw{animation:draw 1.6s cubic-bezier(.65,0,.35,1) both}
-.pulse{animation:pulse 2.4s ease-in-out infinite}
-@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fade{from{opacity:0}to{opacity:1}}
-@keyframes draw{from{stroke-dashoffset:var(--len)}to{stroke-dashoffset:0}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; text-rendering: geometricPrecision; -webkit-font-smoothing: antialiased; }
+.serif { font-family: "Playfair Display", "Georgia", "Iowan Old Style", "Apple Garamond", "Times New Roman", serif; }
+.mono { font-family: "Geist Mono", "JetBrains Mono", "SF Mono", Menlo, Consolas, "Courier New", monospace; }
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+.draw { animation: draw 1.6s cubic-bezier(.22, 1, .36, 1) forwards; }
+.fade { animation: fade 1.1s cubic-bezier(.22, 1, .36, 1) both; }
+.rise { animation: rise 1.1s cubic-bezier(.22, 1, .36, 1) both; }
+.pulse { animation: pulse 2.6s ease-in-out infinite; }
+
+@keyframes draw { from { stroke-dashoffset: var(--len, 600); } to { stroke-dashoffset: 0; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .55; transform: scale(.93); } }
 `;
 
-// ── Helpers ──
-const esc = (s) =>
-  String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const svg = (w, h, desc, body, extraCss = "") =>
+  `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
+  <title>${esc(desc)}</title>
+  <defs>
+    <style>${BASE_CSS}${extraCss}</style>
+  </defs>
+  ${body}
+</svg>`;
 
-const delay = (d) => (d ? `animation-delay:${d}s` : "");
+const delay = (d) => `animation-delay: ${d.toFixed(2)}s;`;
 
-const svg = (w, h, title, body, css = "") =>
-  `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-labelledby="title">` +
-  `<title id="title">${esc(title)}</title><style>${BASE_CSS}${css}</style>${body}</svg>\n`;
+// Text builder helper
+const t = (x, y, text, { cls = "", size = 14, weight = 400, fill = C.ink, ls = 0, anchor = "start", italic = false, style = "" } = {}) => {
+  const styles = [
+    size ? `font-size:${size}px` : "",
+    weight ? `font-weight:${weight}` : "",
+    fill ? `fill:${fill}` : "",
+    ls ? `letter-spacing:${ls}px` : "",
+    anchor !== "start" ? `text-anchor:${anchor}` : "",
+    italic ? "font-style:italic" : "",
+    style,
+  ]
+    .filter(Boolean)
+    .join(";");
+  return `<text x="${x}" y="${y}"${cls ? ` class="${cls}"` : ""}${styles ? ` style="${styles}"` : ""}>${esc(text)}</text>`;
+};
 
-function t(x, y, str, o = {}) {
-  const {
-    cls = "sans",
-    size = 14,
-    fill = C.ink,
-    weight = 400,
-    anchor = "start",
-    ls = 0,
-    italic = false,
-    style = "",
-    raw = false,
-  } = o;
-  return (
-    `<text x="${x}" y="${y}" class="${cls}" font-size="${size}" fill="${fill}" font-weight="${weight}" text-anchor="${anchor}"` +
-    (ls ? ` letter-spacing="${ls}"` : "") +
-    (italic ? ` font-style="italic"` : "") +
-    (style ? ` style="${style}"` : "") +
-    `>${raw ? str : esc(str)}</text>`
-  );
-}
-
-const line = (x1, y1, x2, y2, stroke, o = {}) => {
-  const { width = 1.5, drawDelay = null, dash = "", cap = "round" } = o;
-  const len = Math.round(Math.hypot(x2 - x1, y2 - y1));
+// Line helper
+const line = (x1, y1, x2, y2, stroke = C.rule, { width = 1, dash = "", cap = "round", drawDelay = null } = {}) => {
+  const len = Math.hypot(x2 - x1, y2 - y1).toFixed(1);
   const anim =
     drawDelay === null ? "" : ` class="draw" stroke-dasharray="${len}" style="--len:${len};${delay(drawDelay)}"`;
   return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${stroke}" stroke-width="${width}" stroke-linecap="${cap}"${
@@ -104,19 +103,19 @@ const line = (x1, y1, x2, y2, stroke, o = {}) => {
   }${anim}/>`;
 };
 
-// Pulsing "live" dot with an expanding ring (SMIL — works in all modern browsers).
+// Pulsing "live" dot with expanding wave
 const ping = (cx, cy, color, r = 4, begin = "0s") =>
   `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${color}"/>` +
-  `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${color}" stroke-width="1.5">` +
+  `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${color}" stroke-width="1.8">` +
   `<animate attributeName="r" values="${r};${(r * 3.2).toFixed(1)}" dur="2.2s" begin="${begin}" repeatCount="indefinite"/>` +
-  `<animate attributeName="opacity" values=".7;0" dur="2.2s" begin="${begin}" repeatCount="indefinite"/></circle>`;
+  `<animate attributeName="opacity" values=".75;0" dur="2.2s" begin="${begin}" repeatCount="indefinite"/></circle>`;
 
 const diamond = (cx, cy, s, fill, cls = "") =>
   `<rect x="${cx - s / 2}" y="${cy - s / 2}" width="${s}" height="${s}" fill="${fill}" transform="rotate(45 ${cx} ${cy})"${
     cls ? ` class="${cls}"` : ""
   }/>`;
 
-// Paper plate with a stitched inner border (book-binding feel).
+// Paper card container with stitched border
 const frame = (w, h, { fill = C.paper, stroke = C.parchment, stitch = C.rule } = {}) =>
   `<rect x="1" y="1" width="${w - 2}" height="${h - 2}" rx="12" fill="${fill}" stroke="${stroke}" stroke-width="1.5"/>` +
   `<rect x="9" y="9" width="${w - 18}" height="${h - 18}" rx="8" fill="none" stroke="${stitch}" stroke-opacity=".55" stroke-dasharray="1 5" stroke-linecap="round"/>`;
@@ -142,15 +141,14 @@ const write = (name, content) => {
 };
 
 // ─────────────────────────────────────────────────────────────
-//  1. HEADER — the monograph title plate with a page-turning book
+//  1. HEADER — Monograph masthead with animated book
 // ─────────────────────────────────────────────────────────────
 function buildHeader() {
   const W = 1200;
   const H = 484;
 
-  // Typed command line
   const typed = "$ whoami → Founding Software Engineer @ Krishora Technologies";
-  const charW = 9; // 15px mono
+  const charW = 9;
   const n = typed.length;
   const steps = Array.from({ length: n + 1 }, (_, i) => (i * charW).toFixed(1)).join(";");
   const caretSteps = Array.from({ length: n + 1 }, (_, i) => (52 + i * charW).toFixed(1)).join(";");
@@ -159,7 +157,7 @@ function buildHeader() {
   const chips = [
     { big: "15m → 4s", small: "queue sync" },
     { big: "~700 ms", small: "voice pipeline" },
-    { big: "< 10 ms", small: "edge API TTFB" },
+    { big: "SoWeBuild", small: "agency studio" },
   ];
   let cx = 52;
   const chipSvg = chips
@@ -178,55 +176,68 @@ function buildHeader() {
     })
     .join("");
 
-  // Book geometry
+  const pageW = 216;
+  const pageH = 264;
   const spine = 928;
-  const top = 104;
-  const pageH = 268;
-  const pageW = 220;
-  const lines = (x, ys, widths, fill = C.parchment) =>
-    ys.map((y, i) => `<rect x="${x}" y="${y}" width="${widths[i % widths.length]}" height="5" rx="2.5" fill="${fill}"/>`).join("");
+  const top = 108;
 
-  const bars = [40, 62, 30, 78, 54, 92]
-    .map((h, i) => {
-      const x = 950 + i * 30;
-      return `<rect class="bar" x="${x}" y="${262 - h}" width="18" height="${h}" rx="3" fill="${
-        i % 2 ? C.terracotta : C.olive
-      }" fill-opacity="${i % 2 ? 0.9 : 0.8}" style="${delay(1.2 + i * 0.12)}"/>`;
+  const lines = (x0, ys, ws) =>
+    ys
+      .map(
+        (y, i) =>
+          `<rect x="${x0}" y="${y}" width="${ws[i % ws.length]}" height="5" rx="2.5" fill="${C.parchment}" opacity=".85"/>`
+      )
+      .join("");
+
+  const bars = [0.92, 0.68, 0.84, 0.45, 0.76]
+    .map((pct, i) => {
+      const y = 188 + i * 14;
+      const bw = (pageW - 48) * pct;
+      return (
+        `<rect x="948" y="${y}" width="${pageW - 48}" height="7" rx="3.5" fill="${C.ivory}"/>` +
+        `<rect x="948" y="${y}" width="${bw.toFixed(0)}" height="7" rx="3.5" fill="${
+          i % 2 ? C.terracotta : C.olive
+        }"/>`
+      );
     })
     .join("");
 
   const css = `
-.bar{transform-box:fill-box;transform-origin:50% 100%;animation:grow 1.3s cubic-bezier(.22,1,.36,1) both}
-@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-.leaf{opacity:0;transform-box:view-box;transform-origin:${spine}px 238px;animation:flip 7s cubic-bezier(.55,.05,.35,1) 2.6s infinite}
-@keyframes flip{0%,33%{transform:scaleX(1);opacity:0}35%{transform:scaleX(1);opacity:1}62%{transform:scaleX(-1);opacity:1}65%,100%{transform:scaleX(-1);opacity:0}}
-.leafShade{opacity:0;animation:shade 7s ease-in-out 2.6s infinite}
-@keyframes shade{0%,35%{opacity:0}48%{opacity:.28}62%,100%{opacity:0}}
-.ribbon{transform-box:fill-box;transform-origin:50% 0;animation:sway 4s ease-in-out infinite}
-@keyframes sway{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
+.leaf { transform-origin: ${spine}px ${top}px; transform-box: fill-box; animation: turn 7.5s cubic-bezier(.45, 0, .25, 1) infinite; }
+.leafShade { animation: shade 7.5s cubic-bezier(.45, 0, .25, 1) infinite; }
+.ribbon { transform-origin: 1112px ${top}px; animation: flutter 5s ease-in-out infinite; }
+@keyframes turn {
+  0%, 18%   { transform: rotateY(0deg) skewY(0deg); }
+  42%, 68%  { transform: rotateY(-172deg) skewY(-2deg); }
+  92%, 100% { transform: rotateY(0deg) skewY(0deg); }
+}
+@keyframes shade {
+  0%, 18%   { opacity: 0; }
+  30%, 55%  { opacity: .28; }
+  72%, 100% { opacity: 0; }
+}
+@keyframes flutter {
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(2.8deg); }
+}
 `;
 
   const body =
     frame(W, H) +
     `<defs>
-      <linearGradient id="spineL" x1="0" x2="1"><stop offset="0" stop-color="#3A2B14" stop-opacity="0"/><stop offset="1" stop-color="#3A2B14" stop-opacity=".16"/></linearGradient>
-      <linearGradient id="spineR" x1="0" x2="1"><stop offset="0" stop-color="#3A2B14" stop-opacity=".16"/><stop offset="1" stop-color="#3A2B14" stop-opacity="0"/></linearGradient>
-      <filter id="soft" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      <clipPath id="typeClip"><rect x="52" y="314" height="28" width="0"><animate attributeName="width" values="${steps}" dur="${typeDur}s" begin="1.4s" fill="freeze" calcMode="discrete"/></rect></clipPath>
+      <linearGradient id="spineL" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#2C2318" stop-opacity=".25"/><stop offset="1" stop-color="#2C2318" stop-opacity="0"/></linearGradient>
+      <linearGradient id="spineR" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2C2318" stop-opacity=".3"/><stop offset="1" stop-color="#2C2318" stop-opacity="0"/></linearGradient>
+      <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6"/></filter>
+      <clipPath id="typeClip"><rect x="52" y="318" width="${charW * n}" height="26"/></clipPath>
     </defs>` +
-    // Masthead
-    ping(48, 49, C.olive) +
-    t(62, 54, "PRODUCTION ARCHITECTURE & SYSTEMS", { cls: "mono rise", size: 12, weight: 700, ls: 2, style: delay(0.1) }) +
-    t(1152, 54, "VOL. I  ·  INTERACTIVE ENGINEERING MONOGRAPH", {
-      cls: "mono rise",
-      size: 12,
-      weight: 700,
-      ls: 2,
-      fill: C.terracotta,
-      anchor: "end",
-      style: delay(0.2),
-    }) +
-    line(36, 74, 1164, 74, C.parchment, { drawDelay: 0.2 }) +
+    // Top banner
+    t(36, 42, "OM THAKUR", { cls: "serif rise", size: 14, weight: 800, ls: 3, fill: C.ink }) +
+    t(168, 42, "ENGINEERING MONOGRAPH", { cls: "mono rise", size: 11, weight: 700, ls: 2.2, fill: C.terracotta, style: delay(0.1) }) +
+    diamond(356, 38, 6, C.terracotta, "pulse") +
+    t(374, 42, "VOLUME I · MMXXVI", { cls: "mono rise", size: 11, weight: 600, ls: 2, fill: C.muted, style: delay(0.2) }) +
+    ping(1088, 38, C.olive, 4) +
+    t(1104, 42, "LIVE MONOGRAPH", { cls: "mono", size: 10.5, weight: 700, ls: 1.6, fill: C.olive }) +
+    line(36, 56, 1164, 56, C.parchment, { drawDelay: 0.25 }) +
     // Title block
     t(52, 132, "BACKEND ENGINEER · DISTRIBUTED SYSTEMS · SCALABLE APIS", {
       cls: "mono rise",
@@ -306,7 +317,7 @@ function buildHeader() {
     // Footer
     line(36, 448, 1164, 448, C.parchment, { drawDelay: 0.4 }) +
     t(36, 468, "CHAPTER 01  ·  PAGE 01", { cls: "mono fade", size: 11, weight: 600, ls: 2, fill: C.muted, style: delay(1) }) +
-    t(600, 468, "TYPESCRIPT · PYTHON · KOTLIN · POSTGRESQL · QDRANT · REDIS", {
+    t(600, 468, "TYPESCRIPT · PYTHON · KOTLIN · POSTGRESQL · SOWEBUILD.IN · REDIS", {
       cls: "mono fade",
       size: 11,
       weight: 600,
@@ -326,9 +337,9 @@ function buildHeader() {
 const CHAPTERS = [
   { num: "01", title: "Preface", sub: "Who is writing this volume", page: "03" },
   { num: "02", title: "Production Benchmarks", sub: "Measured in production, not in slides", page: "07" },
-  { num: "03", title: "Selected Work", sub: "Systems & open source", page: "14" },
+  { num: "03", title: "Selected Work", sub: "Systems, studio & open source", page: "14" },
   { num: "04", title: "Technical Specimen", sub: "Tools tested under real workloads", page: "22" },
-  { num: "05", title: "Career Chronology", sub: "Appointments & deliverables", page: "28" },
+  { num: "05", title: "Career Chronology", sub: "Appointments & verified deliverables", page: "28" },
   { num: "06", title: "Live Telemetry", sub: "Signals pulled from GitHub", page: "34" },
   { num: "07", title: "Correspondence", sub: "Letters are always answered", page: "40" },
 ];
@@ -351,21 +362,21 @@ function buildChapter({ num, title, sub, page }) {
 }
 
 // ─────────────────────────────────────────────────────────────
-//  3. PRODUCTION BENCHMARKS LEDGER
+//  3. PRODUCTION BENCHMARKS LEDGER (High-legibility, larger fonts)
 // ─────────────────────────────────────────────────────────────
 function buildMetrics() {
-  const TRACK_X = 480;
-  const TRACK_W = 460;
+  const TRACK_X = 520;
+  const TRACK_W = 400;
   const rows = [
     {
       label: "Async message-queue sync",
-      ctx: "SUMERU · FLEXBASE QUEUES · POLLING CRON REPLACED",
+      ctx: "SUMERU · FLEXBASE QUEUES · POLLING CRONS ELIMINATED",
       cap: "BEFORE 15 MIN  →  AFTER 4 S",
       from: TRACK_W,
-      to: 2.5,
+      to: 4,
       color: C.terracotta,
       result: "−99.5%",
-      sub: "15 MIN → 4 S",
+      sub: "15 MIN → 4 S SYNC",
     },
     {
       label: "Real-time voice pipeline",
@@ -385,7 +396,7 @@ function buildMetrics() {
       to: TRACK_W * 0.1,
       color: C.terracotta,
       result: "< 10 ms",
-      sub: "TTFB · OPEN SOURCE",
+      sub: "TTFB · EDGE API",
     },
     {
       label: "Edge publication engine",
@@ -400,7 +411,7 @@ function buildMetrics() {
     {
       label: "Academic distinction",
       ctx: "B.SC. INFORMATION TECHNOLOGY · UNIVERSITY OF MUMBAI",
-      cap: "CGPA  ·  0 — 10",
+      cap: "ACADEMIC CGPA  ·  0 — 10",
       from: 0,
       to: TRACK_W * 0.855,
       color: C.burgundy,
@@ -410,54 +421,69 @@ function buildMetrics() {
   ];
 
   const W = 1200;
-  const ROW = 76;
-  const Y0 = 76;
-  const H = Y0 + rows.length * ROW + 26;
+  const ROW = 112;
+  const Y0 = 80;
+  const H = Y0 + rows.length * ROW + 16;
 
   const rowSvg = rows
     .map((r, i) => {
       const y = Y0 + i * ROW;
       const d = 0.3 + i * 0.18;
-      const anim = (attr, a, b, extra = "") =>
-        `<animate attributeName="${attr}" values="${a};${b}" keyTimes="0;1" calcMode="spline" keySplines=".22 1 .36 1" dur="1.8s" begin="${d}s" fill="freeze"${extra}/>`;
+      const anim = (attr, a, b) =>
+        `<animate attributeName="${attr}" values="${a};${b}" keyTimes="0;1" calcMode="spline" keySplines=".22 1 .36 1" dur="1.8s" begin="${d}s" fill="freeze"/>`;
       return (
         `<g class="rise" style="${delay(d - 0.15)}">` +
-        t(36, y + 32, r.label, { cls: "serif", size: 21, weight: 800 }) +
-        t(36, y + 53, r.ctx, { cls: "mono", size: 10.5, weight: 600, ls: 0.6, fill: C.muted }) +
-        t(TRACK_X, y + 21, r.cap, { cls: "mono", size: 10, weight: 600, ls: 1, fill: C.muted }) +
-        `<rect x="${TRACK_X}" y="${y + 30}" width="${TRACK_W}" height="10" rx="5" fill="${C.parchment}"/>` +
-        `<rect x="${TRACK_X}" y="${y + 30}" width="${r.from}" height="10" rx="5" fill="${r.color}">${anim("width", r.from, r.to)}</rect>` +
-        `<circle cx="${TRACK_X + r.from}" cy="${y + 35}" r="6" fill="${r.color}" stroke="${C.card}" stroke-width="2.5">${anim(
+        // Left: Label + Context (large & readable)
+        t(36, y + 36, r.label, { cls: "serif", size: 24, weight: 800, fill: C.ink }) +
+        t(36, y + 68, r.ctx, { cls: "mono", size: 13, weight: 700, ls: 0.8, fill: "#4A4541" }) +
+        // Middle: Signal Bar + Caption
+        t(TRACK_X, y + 26, r.cap, { cls: "mono", size: 13, weight: 700, ls: 1.2, fill: C.ink }) +
+        `<rect x="${TRACK_X}" y="${y + 38}" width="${TRACK_W}" height="18" rx="9" fill="#E8DEC8" stroke="${C.rule}" stroke-width="1"/>` +
+        `<rect x="${TRACK_X}" y="${y + 38}" width="${r.from}" height="18" rx="9" fill="${r.color}">${anim("width", r.from, r.to)}</rect>` +
+        `<circle cx="${TRACK_X + r.from}" cy="${y + 47}" r="9" fill="${r.color}" stroke="${C.card}" stroke-width="3">${anim(
           "cx",
           TRACK_X + r.from,
           TRACK_X + r.to
         )}</circle>` +
-        t(1164, y + 38, r.result, { cls: "serif", size: 29, weight: 900, fill: r.color, anchor: "end" }) +
-        t(1164, y + 57, r.sub, { cls: "mono", size: 10.5, weight: 600, ls: 0.8, fill: C.muted, anchor: "end" }) +
+        // Right: Result + Subtitle
+        t(1164, y + 44, r.result, { cls: "serif", size: 38, weight: 900, fill: r.color, anchor: "end" }) +
+        t(1164, y + 72, r.sub, { cls: "mono", size: 13.5, weight: 700, ls: 1.0, fill: "#2C2825", anchor: "end" }) +
         `</g>` +
-        (i < rows.length - 1 ? line(36, y + ROW - 4, 1164, y + ROW - 4, C.parchment, { width: 1, dash: "2 5" }) : "")
+        (i < rows.length - 1 ? line(36, y + ROW - 6, 1164, y + ROW - 6, C.parchment, { width: 1.2, dash: "2 6" }) : "")
       );
     })
     .join("");
 
   const body =
     frame(W, H) +
-    t(36, 46, "SYSTEM", { cls: "mono fade", size: 11, weight: 700, ls: 2.4, fill: C.muted }) +
-    t(TRACK_X, 46, "SIGNAL", { cls: "mono fade", size: 11, weight: 700, ls: 2.4, fill: C.muted }) +
-    t(1164, 46, "RESULT", { cls: "mono fade", size: 11, weight: 700, ls: 2.4, fill: C.muted, anchor: "end" }) +
-    line(36, 60, 1164, 60, C.rule, { width: 1.2, drawDelay: 0.1 }) +
+    t(36, 48, "SYSTEM / ARCHITECTURE", { cls: "mono fade", size: 13, weight: 700, ls: 2.2, fill: C.terracotta }) +
+    t(TRACK_X, 48, "PRODUCTION SIGNAL & BENCHMARK", { cls: "mono fade", size: 13, weight: 700, ls: 2.2, fill: C.terracotta }) +
+    t(1164, 48, "VERIFIED RESULT", { cls: "mono fade", size: 13, weight: 700, ls: 2.2, fill: C.terracotta, anchor: "end" }) +
+    line(36, 64, 1164, 64, C.rule, { width: 1.5, drawDelay: 0.1 }) +
     rowSvg;
 
   write("metrics.svg", svg(W, H, "Production benchmarks — 15 min to 4 s, ~700 ms, under 10 ms, under 30 ms, First Rank", body));
 }
 
 // ─────────────────────────────────────────────────────────────
-//  4. PROJECT CARDS
+//  4. PROJECT CARDS (Includes SoWeBuild.in agency card)
 // ─────────────────────────────────────────────────────────────
 const PROJECTS = [
   {
+    file: "project-sowebuild",
+    num: "01",
+    category: "Agency & Digital Studio",
+    title: "SoWeBuild.in",
+    metric: "BUILD · LAUNCH · SCALE",
+    desc: "Digital engineering agency building high-performance websites, bespoke software, AI systems, and business automation from design to cloud deployment.",
+    chips: ["Next.js", "Full-Stack", "AI Solutions", "Automation"],
+    status: "STUDIO & AGENCY",
+    host: "sowebuild.in",
+    href: "https://sowebuild.in",
+  },
+  {
     file: "project-commerce",
-    num: "03",
+    num: "02",
     category: "Distributed Web",
     title: "Digital Commerce Platform",
     metric: "HMAC · AES-256",
@@ -469,7 +495,7 @@ const PROJECTS = [
   },
   {
     file: "project-devpic",
-    num: "04",
+    num: "03",
     category: "Low-Level Tools",
     title: "devpic",
     metric: "< 10 MS TTFB",
@@ -481,7 +507,7 @@ const PROJECTS = [
   },
   {
     file: "project-agni",
-    num: "05",
+    num: "04",
     category: "Autonomous AI",
     title: "Agni",
     metric: "100% OFFLINE",
@@ -493,7 +519,7 @@ const PROJECTS = [
   },
   {
     file: "project-finread",
-    num: "06",
+    num: "05",
     category: "Mobile Systems",
     title: "Fin Read",
     metric: "OFFLINE-FIRST",
@@ -505,7 +531,7 @@ const PROJECTS = [
   },
   {
     file: "project-gitfool",
-    num: "07",
+    num: "06",
     category: "Distributed Web",
     title: "GitFool",
     metric: "< 30 MS TTFB",
@@ -521,7 +547,7 @@ function buildProjectCard(p) {
   const W = 580;
   const H = 272;
   const badgeW = monoW(p.metric, 11, 0.6) + 24;
-  const descLines = wrap(p.desc, 66).slice(0, 3);
+  const descLines = wrap(p.desc, 64).slice(0, 3);
 
   let chipX = 28;
   const chipSvg = p.chips
@@ -558,40 +584,46 @@ function buildProjectCard(p) {
   write(`${p.file}.svg`, svg(W, H, `${p.title} — ${p.desc}`, body));
 }
 
+// Full-width callout for the 3D book monograph
 function buildMonographCard() {
-  const W = 580;
-  const H = 272;
+  const W = 1200;
+  const H = 210;
   const css = `
-.shine{animation:shine 3.6s ease-in-out 1.2s infinite}
-@keyframes shine{0%{transform:translateX(-140px)}60%,100%{transform:translateX(320px)}}
+.shine { animation: shine 3.6s ease-in-out 1.2s infinite; }
+@keyframes shine { 0% { transform: translateX(-140px); } 60%, 100% { transform: translateX(360px); } }
 `;
-  const desc = wrap(
-    "Ten chapters, live device telemetry, architecture blueprints, code specimens and an engineering FAQ — bound into an interactive 3D book.",
-    64
-  );
   const body =
     `<defs>
       <linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-      <clipPath id="btn"><rect x="28" y="172" width="232" height="44" rx="8"/></clipPath>
+      <clipPath id="btn"><rect x="910" y="74" width="254" height="48" rx="8"/></clipPath>
     </defs>` +
     `<rect x="1" y="1" width="${W - 2}" height="${H - 2}" rx="12" fill="${C.ink}" stroke="${C.ink}"/>` +
     `<rect x="9" y="9" width="${W - 18}" height="${H - 18}" rx="8" fill="none" stroke="${C.muted}" stroke-dasharray="1 5" stroke-linecap="round"/>` +
     `<g class="rise">` +
-    ping(34, 40, C.ember, 3.5) +
-    t(46, 44, "CONTINUE READING", { cls: "mono", size: 11, weight: 700, ls: 2.2, fill: C.ember }) +
-    t(552, 44, "VOL. I", { cls: "mono", size: 11, weight: 700, ls: 2.2, fill: C.mist, anchor: "end" }) +
-    t(28, 90, "The full monograph", { cls: "serif", size: 30, weight: 800, fill: C.paper }) +
-    desc.map((l, i) => t(28, 120 + i * 22, l, { size: 14.5, fill: C.mist })).join("") +
+    ping(42, 42, C.ember, 4) +
+    t(58, 46, "CONTINUE READING · ARCHITECTURE MONOGRAPH", { cls: "mono", size: 12, weight: 700, ls: 2.2, fill: C.ember }) +
+    t(1160, 46, "VOL. I  ·  INTERACTIVE 3D BOOK", { cls: "mono", size: 12, weight: 700, ls: 2.2, fill: C.mist, anchor: "end" }) +
+    t(40, 96, "The Engineering Monograph at omthakur.in", { cls: "serif", size: 32, weight: 900, fill: C.paper }) +
+    t(40, 126, "Ten chapters, live device telemetry, architecture blueprints, code specimens, OKF knowledge bundle and engineering FAQ.", {
+      size: 15.5,
+      fill: C.mist,
+    }) +
     `</g>` +
     `<g class="fade" style="${delay(0.5)}">` +
-    `<rect x="28" y="172" width="232" height="44" rx="8" fill="${C.terracotta}"/>` +
-    `<g clip-path="url(#btn)"><rect class="shine" x="28" y="172" width="90" height="44" fill="url(#g)"/></g>` +
-    t(144, 199, "Open omthakur.in  →", { cls: "mono", size: 13, weight: 700, fill: C.paper, anchor: "middle" }) +
-    t(552, 199, "10 CHAPTERS · 3D BOOK", { cls: "mono", size: 10.5, weight: 600, ls: 1.4, fill: C.mist, anchor: "end" }) +
+    `<rect x="910" y="74" width="254" height="48" rx="8" fill="${C.terracotta}"/>` +
+    `<g clip-path="url(#btn)"><rect class="shine" x="910" y="74" width="100" height="48" fill="url(#g)"/></g>` +
+    t(1037, 104, "Open omthakur.in  →", { cls: "mono", size: 14.5, weight: 700, fill: C.paper, anchor: "middle" }) +
     `</g>` +
-    line(28, 232, 552, 232, C.muted, { width: 1, drawDelay: 0.3 }) +
-    t(28, 255, "RESUME · LLMS.TXT · OKF BUNDLE", { cls: "mono fade", size: 10.5, weight: 600, ls: 1.6, fill: C.mist, style: delay(0.7) }) +
-    t(552, 255, "↗ omthakur.in", { cls: "mono fade", size: 11, weight: 700, fill: C.ember, anchor: "end", style: delay(0.7) });
+    line(40, 156, 1160, 156, C.muted, { width: 1, drawDelay: 0.3 }) +
+    t(40, 182, "RESUME  ·  LLMS.TXT  ·  OKF KNOWLEDGE BUNDLE  ·  POST-MORTEMS", {
+      cls: "mono fade",
+      size: 11.5,
+      weight: 700,
+      ls: 1.6,
+      fill: C.mist,
+      style: delay(0.7),
+    }) +
+    t(1160, 182, "↗ HTTPS://OMTHAKUR.IN", { cls: "mono fade", size: 12, weight: 700, ls: 1.4, fill: C.ember, anchor: "end", style: delay(0.7) });
 
   write("project-monograph.svg", svg(W, H, "Read the full interactive monograph at omthakur.in", body, css));
 }
@@ -659,7 +691,6 @@ function buildStack() {
 
   const body =
     frame(W, H) +
-    // Type specimen panel
     `<rect x="24" y="24" width="222" height="356" rx="8" fill="${C.ivory}" stroke="${C.parchment}"/>` +
     t(44, 56, "TYPE SPECIMEN", { cls: "mono fade", size: 10.5, weight: 700, ls: 2, fill: C.terracotta }) +
     t(40, 198, "Aa", { cls: "serif rise", size: 128, weight: 900, ls: -3, style: delay(0.1) }) +
@@ -675,12 +706,12 @@ function buildStack() {
 }
 
 // ─────────────────────────────────────────────────────────────
-//  6. CAREER CHRONOLOGY
+//  6. CAREER CHRONOLOGY (Corrected April dates, NO month counts)
 // ─────────────────────────────────────────────────────────────
 function buildExperience() {
   const entries = [
     {
-      date: "MAY 2026 — PRESENT",
+      date: "APR 2026 — PRESENT",
       company: "Krishora Technologies",
       role: "Founding Software Engineer",
       note: "~700 ms Python/CUDA voice pipelines · Qdrant retrieval router for Sevak AI · self-hosted Linux, Nginx & Mailcow infrastructure",
@@ -688,60 +719,67 @@ function buildExperience() {
       current: true,
     },
     {
-      date: "AUG 2025 — MAY 2026",
+      date: "AUG 2025 — APR 2026",
       company: "Cyber Intelligence & Research Lab (CIARL)",
       role: "Software Developer",
       note: "Encrypted offline Kotlin queues · React/PostgreSQL RBAC portals · citation-backed legal RAG · Matrix chat, voice & video",
-      tag: "9 MONTHS",
+      tag: null,
     },
     {
       date: "AUG 2024 — FEB 2025",
       company: "Sumeru Technology Solutions",
       role: "Software Development Engineer Intern",
       note: "Flexbase message queues (15 min → 4 s sync) · production database crash RCA · PHP → TypeScript/Deno Edge migration",
-      tag: "7 MONTHS",
+      tag: null,
     },
     {
       date: "JUN 2024 — AUG 2024",
       company: "Bhimrao Pradhan College, University of Mumbai",
       role: "Assistant Professor (Volunteer)",
       note: "Taught B.Sc. IT database systems and software architecture",
-      tag: "3 MONTHS",
+      tag: null,
     },
   ];
 
   const W = 1200;
-  const STEP = 114;
-  const Y0 = 52;
-  const H = Y0 + entries.length * STEP + 12;
-  const spineEnd = Y0 + (entries.length - 1) * STEP + 12;
+  const STEP = 126;
+  const Y0 = 56;
+  const H = Y0 + entries.length * STEP + 14;
+  const spineEnd = Y0 + (entries.length - 1) * STEP + 14;
 
   const entrySvg = entries
     .map((e, i) => {
       const y = Y0 + i * STEP;
       const d = 0.3 + i * 0.2;
       const dot = e.current
-        ? ping(64, y + 6, C.olive, 6)
-        : `<circle cx="64" cy="${y + 6}" r="7" fill="${C.card}" stroke="${C.terracotta}" stroke-width="2.5"/><circle cx="64" cy="${y + 6}" r="2.6" fill="${C.terracotta}"/>`;
-      const tagW = monoW(e.tag, 10.5, 1.4) + (e.current ? 34 : 24);
-      const tagColor = e.current ? C.olive : C.muted;
+        ? ping(64, y + 8, C.olive, 6.5)
+        : `<circle cx="64" cy="${y + 8}" r="7" fill="${C.card}" stroke="${C.terracotta}" stroke-width="2.5"/><circle cx="64" cy="${y + 8}" r="2.8" fill="${C.terracotta}"/>`;
+
+      // Only display the pill for the current live role. Do not show duration counts for past roles.
+      let badgeMarkup = "";
+      if (e.current && e.tag) {
+        const tagW = monoW(e.tag, 11, 1.4) + 36;
+        badgeMarkup =
+          `<rect x="${(1164 - tagW).toFixed(0)}" y="${y - 6}" width="${tagW.toFixed(0)}" height="26" rx="13" fill="${C.olive}" fill-opacity=".12"/>` +
+          `<circle cx="${(1164 - tagW + 15).toFixed(0)}" cy="${y + 7}" r="3.5" fill="${C.olive}" class="pulse"/>` +
+          t(1164 - 14, y + 11, e.tag, {
+            cls: "mono",
+            size: 11,
+            weight: 700,
+            ls: 1.4,
+            fill: C.olive,
+            anchor: "end",
+          });
+      }
+
       return (
         `<g class="fade" style="${delay(d)}">${dot}</g>` +
         `<g class="rise" style="${delay(d)}">` +
-        t(96, y + 11, e.date, { cls: "mono", size: 11.5, weight: 700, ls: 2, fill: C.terracotta }) +
-        `<rect x="${(1164 - tagW).toFixed(0)}" y="${y - 7}" width="${tagW.toFixed(0)}" height="24" rx="12" fill="${tagColor}" fill-opacity=".1"/>` +
-        (e.current ? `<circle cx="${(1164 - tagW + 14).toFixed(0)}" cy="${y + 5}" r="3.5" fill="${C.olive}" class="pulse"/>` : "") +
-        t((1164 - (e.current ? 12 : tagW / 2)).toFixed(0), y + 9, e.tag, {
-          cls: "mono",
-          size: 10.5,
-          weight: 700,
-          ls: 1.4,
-          fill: tagColor,
-          anchor: e.current ? "end" : "middle",
-        }) +
-        t(96, y + 44, e.company, { cls: "serif", size: 24, weight: 800 }) +
-        t(96, y + 68, e.role, { cls: "serif", size: 16.5, italic: true, fill: C.muted }) +
-        `<text x="96" y="${y + 92}" class="sans" font-size="14" fill="${C.charcoal}"><tspan fill="${C.terracotta}" font-weight="700">→ </tspan>${esc(
+        t(96, y + 13, e.date, { cls: "mono", size: 12.5, weight: 700, ls: 2, fill: C.terracotta }) +
+        badgeMarkup +
+        t(96, y + 48, e.company, { cls: "serif", size: 26, weight: 800 }) +
+        t(96, y + 74, e.role, { cls: "serif", size: 18, italic: true, fill: C.muted }) +
+        `<text x="96" y="${y + 100}" class="sans" font-size="15" fill="${C.charcoal}"><tspan fill="${C.terracotta}" font-weight="700">→ </tspan>${esc(
           e.note
         )}</text>` +
         `</g>` +
@@ -788,23 +826,24 @@ function buildColophon() {
     }) +
     t(600, 224, "Thank you for reading this volume.", {
       cls: "serif fade",
-      size: 16,
+      size: 15,
       italic: true,
-      fill: C.body,
+      fill: C.charcoal,
       anchor: "middle",
-      style: delay(1.6),
+      style: delay(1.4),
     });
 
   write("colophon.svg", svg(W, H, "Colophon — signed, Om Thakur", body, css));
 }
 
 // ─────────────────────────────────────────────────────────────
-//  README
+//  8. README GENERATOR
 // ─────────────────────────────────────────────────────────────
 function buildReadme() {
   const hex = (c) => c.replace("#", "");
   const typingLines = [
     "Designing low-latency backends that stay up",
+    "Co-founder @ SoWeBuild.in · Web & AI Systems",
     "15 min → 4 s · async message queues",
     "~700 ms · real-time GPU voice pipelines",
     "< 10 ms · stateless Edge APIs",
@@ -840,8 +879,6 @@ function buildReadme() {
     `    <td width="50%"><a href="${b.href}"><img src="./assets/${b.file}.svg" width="100%" alt="${esc(b.title)} — ${esc(b.desc)}" /></a></td>\n` +
     `  </tr>\n`;
 
-  const monograph = { file: "project-monograph", href: "https://omthakur.in", title: "The full monograph", desc: "Read the interactive engineering monograph at omthakur.in" };
-
   const md = `<!--
   Om Thakur · GitHub profile — "Engineering Monograph", Vol. I
   Paper, ink & terracotta — the same theme as https://omthakur.in
@@ -853,12 +890,13 @@ function buildReadme() {
 </a>
 
 <p align="center">
-  <a href="https://omthakur.in"><img src="${typing}" alt="Designing low-latency backends that stay up · 15 min → 4 s async message queues · ~700 ms GPU voice pipelines · under 10 ms Edge APIs" /></a>
+  <a href="https://omthakur.in"><img src="${typing}" alt="Designing low-latency backends that stay up · Co-founder @ SoWeBuild.in · 15 min → 4 s async message queues · ~700 ms GPU voice pipelines · under 10 ms Edge APIs" /></a>
 </p>
 
 <p align="center">
-  ${badge("omthakur.in", hex(C.ink), "googlechrome", hex(C.ember), "https://omthakur.in", "Website")}
-  ${badge("Resume", hex(C.terracotta), "readthedocs", hex(C.paper), "https://omthakur.in/resume", "Resume")}
+  ${badge("omthakur.in", hex(C.ink), "googlechrome", hex(C.ember), "https://omthakur.in", "Portfolio")}
+  ${badge("SoWeBuild.in", hex(C.terracotta), "rocket", hex(C.paper), "https://sowebuild.in", "SoWeBuild Agency")}
+  ${badge("Resume", hex(C.ink), "readthedocs", hex(C.paper), "https://omthakur.in/resume", "Resume")}
   ${badge("GitFool_Blog", hex(C.olive), "rss", hex(C.paper), "https://blogs.omthakur.in", "Blog")}
   ${badge("LinkedIn", hex(C.paper), "linkedin", "0A66C2", "https://linkedin.com/in/omthakur2366", "LinkedIn")}
   ${badge("@omthakur2366", hex(C.parchment), "x", hex(C.ink), "https://twitter.com/omthakur2366", "X / Twitter")}
@@ -868,22 +906,24 @@ function buildReadme() {
 
 <img src="./assets/chapter-01.svg" width="100%" alt="Chapter 01 — Preface" />
 
-**Backend engineer** focused on distributed, database-backed architectures and production reliability. I build the parts of a system nobody notices until they break — message queues, real-time streaming pipelines, offline-first sync, and the auth & encryption layers in between.
+**Backend engineer** focused on distributed, database-backed architectures, production reliability, and custom digital systems. I build the parts of an architecture nobody notices until they break — message queues, real-time streaming pipelines, offline-first sync, and the auth & encryption layers in between.
 
-- **Now** — Founding Software Engineer at **Krishora Technologies**, shipping ~700 ms Python/CUDA voice pipelines and Qdrant-backed retrieval for Sevak AI.
-- **Before** — Encrypted offline queues & legal RAG at **CIARL**; replaced polling crons with Flexbase queues at **Sumeru** (15 min → 4 s).
-- **Writing** — architecture deep dives on [**GitFool**](https://blogs.omthakur.in), my edge-rendered blog engine.
-- **Open to** — Backend, Distributed Systems & Founding Engineer roles, and architecture consulting.
+- **Now** — Founding Software Engineer at **Krishora Technologies** (joined Apr 2026), shipping ~700 ms Python/CUDA voice pipelines and Qdrant-backed retrieval for Sevak AI.
+- **Agency** — Co-founder at [**SoWeBuild.in**](https://sowebuild.in) — building high-performance websites, bespoke software, AI systems, and business automation from zero to scale.
+- **Before** — Encrypted offline queues & legal RAG at **CIARL** (Aug 2025 – Apr 2026); replaced polling crons with Flexbase queues at **Sumeru** (15 min → 4 s).
+- **Writing** — Architecture deep dives on [**GitFool**](https://blogs.omthakur.in), my edge-rendered blog engine.
+- **Open to** — Backend, Distributed Systems & Founding Engineer roles, agency collaborations, and architecture consulting.
 
 \`\`\`ts
 // whoami.ts — Chapter 01, Page 03
 const om = {
-  role:    "Founding Software Engineer @ Krishora Technologies",
-  focus:   ["distributed systems", "real-time pipelines", "message queues", "applied RAG"],
-  stack:   ["TypeScript", "Python", "Kotlin", "PostgreSQL", "Qdrant", "Redis"],
-  based:   "Mumbai, IN · IST (UTC+5:30)",
-  honours: "First Rank · B.Sc. IT · University of Mumbai (CGPA 8.55/10)",
-  reach:   "omthakur2366@gmail.com",
+  role:     "Founding Software Engineer @ Krishora Technologies",
+  agency:   "Co-founder @ SoWeBuild.in (Websites, Software & AI Automation)",
+  focus:    ["distributed systems", "real-time pipelines", "message queues", "applied RAG"],
+  stack:    ["TypeScript", "Python", "Kotlin", "PostgreSQL", "Qdrant", "Redis"],
+  based:    "Mumbai, IN · IST (UTC+5:30)",
+  honours:  "First Rank · B.Sc. IT · University of Mumbai (CGPA 8.55/10)",
+  reach:    "omthakur2366@gmail.com",
 } as const;
 \`\`\`
 
@@ -898,7 +938,13 @@ const om = {
 <img src="./assets/chapter-03.svg" width="100%" alt="Chapter 03 — Selected Work" />
 
 <table>
-${projectRow(PROJECTS[0], PROJECTS[1])}${projectRow(PROJECTS[2], PROJECTS[3])}${projectRow(PROJECTS[4], monograph)}</table>
+${projectRow(PROJECTS[0], PROJECTS[1])}${projectRow(PROJECTS[2], PROJECTS[3])}${projectRow(PROJECTS[4], PROJECTS[5])}</table>
+
+<br />
+
+<a href="https://omthakur.in">
+  <img src="./assets/project-monograph.svg" width="100%" alt="The full monograph — Read the interactive engineering monograph at omthakur.in" />
+</a>
 
 <br />
 
@@ -911,7 +957,7 @@ ${projectRow(PROJECTS[0], PROJECTS[1])}${projectRow(PROJECTS[2], PROJECTS[3])}${
 <img src="./assets/chapter-05.svg" width="100%" alt="Chapter 05 — Career Chronology" />
 
 <a href="https://omthakur.in/resume">
-  <img src="./assets/experience.svg" width="100%" alt="Krishora Technologies (May 2026 – present), CIARL (Aug 2025 – May 2026), Sumeru Technology Solutions (Aug 2024 – Feb 2025), Bhimrao Pradhan College (Jun – Aug 2024)." />
+  <img src="./assets/experience.svg" width="100%" alt="Krishora Technologies (Apr 2026 – present), CIARL (Aug 2025 – Apr 2026), Sumeru Technology Solutions (Aug 2024 – Feb 2025), Bhimrao Pradhan College (Jun – Aug 2024)." />
 </a>
 
 <br />
@@ -938,12 +984,13 @@ ${projectRow(PROJECTS[0], PROJECTS[1])}${projectRow(PROJECTS[2], PROJECTS[3])}${
 <img src="./assets/chapter-07.svg" width="100%" alt="Chapter 07 — Correspondence" />
 
 <p align="center">
-  Have a distributed-systems problem, a founding role, or just a good queue story?<br />
+  Have a distributed-systems problem, an agency project for SoWeBuild, a founding role, or just a good queue story?<br />
   <b>Write to me — letters are always answered.</b>
 </p>
 
 <p align="center">
   ${badge("omthakur2366@gmail.com", hex(C.paper), "gmail", hex(C.terracotta), "mailto:omthakur2366@gmail.com", "Email")}
+  ${badge("SoWeBuild.in", hex(C.terracotta), "rocket", hex(C.paper), "https://sowebuild.in", "Agency")}
   ${badge("Read_the_Monograph", hex(C.ink), "bookstack", hex(C.ember), "https://omthakur.in", "Portfolio")}
   ${badge("Instagram", hex(C.paper), "instagram", "A81745", "https://www.instagram.com/omthakur.op", "Instagram")}
 </p>
@@ -970,4 +1017,3 @@ buildStack();
 buildExperience();
 buildColophon();
 buildReadme();
-console.log("Done.");
