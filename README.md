@@ -21,20 +21,14 @@
   <a href="https://twitter.com/omthakur2366"><img src="https://img.shields.io/badge/@omthakur2366-E2D5C6?style=for-the-badge&logo=x&logoColor=1A1816" alt="X / Twitter" /></a>
 </p>
 
-<br />
+---
 
-<img src="./assets/chapter-01.svg" width="100%" alt="Chapter 01 — Preface" />
+### § 01 · Preface
 
 **Backend engineer** focused on distributed, database-backed architectures, production reliability, and custom digital systems. I build the parts of an architecture nobody notices until they break — message queues, real-time streaming pipelines, offline-first sync, and the auth & encryption layers in between.
 
-- **Now** — Founding Software Engineer at **Krishora Technologies** (joined Apr 2026), shipping ~700 ms Python/CUDA voice pipelines and Qdrant-backed retrieval for Sevak AI.
-- **Agency** — Founder of [**SoWeBuild.in**](https://sowebuild.in) — building high-performance websites, bespoke software, AI systems, and business automation from zero to scale.
-- **Before** — Encrypted offline queues & legal RAG at **CIARL** (Aug 2025 – Apr 2026); replaced polling crons with Flexbase queues at **Sumeru** (15 min → 4 s).
-- **Writing** — Architecture deep dives on [**GitFool**](https://blogs.omthakur.in), my edge-rendered blog engine.
-- **Open to** — Backend, Distributed Systems & Founding Engineer roles, agency collaborations, and architecture consulting.
-
 ```ts
-// whoami.ts — Chapter 01, Page 03
+// whoami.ts
 const om = {
   role:     "Founding Software Engineer @ Krishora Technologies",
   agency:   "Founder @ SoWeBuild.in (Websites, Software & AI Automation)",
@@ -46,15 +40,15 @@ const om = {
 } as const;
 ```
 
-<br />
+---
 
-<img src="./assets/chapter-02.svg" width="100%" alt="Chapter 02 — Production Benchmarks" />
+### § 02 · Production Benchmarks
 
 <img src="./assets/metrics.svg" width="100%" alt="Production benchmarks: async queue sync 15 min to 4 s (−99.5%); real-time voice pipeline ~700 ms; devpic Edge API under 10 ms TTFB; GitFool under 30 ms TTFB; First Rank, CGPA 8.55/10." />
 
-<br />
+---
 
-<img src="./assets/chapter-03.svg" width="100%" alt="Chapter 03 — Selected Work" />
+### § 03 · Selected Work
 
 <table>
   <tr>
@@ -65,54 +59,42 @@ const om = {
     <td width="50%"><a href="https://github.com/MonsterFlick/devpic"><img src="./assets/project-devpic.svg" width="100%" alt="devpic — Open-source, stateless REST API that generates deterministic mathematical SVG meshes on the Next.js Edge Runtime — zero database, zero dependencies, sub-10 ms responses." /></a></td>
     <td width="50%"><a href="https://github.com/MonsterFlick/Agni"><img src="./assets/project-agni.svg" width="100%" alt="Agni — Local Windows automation agent powered by Ollama models, with regex command blacklisting, destructive-operation safeguards and a self-repairing, error-driven execution loop." /></a></td>
   </tr>
-  <tr>
-    <td width="50%"><a href="https://github.com/MonsterFlick/Fin-Read"><img src="./assets/project-finread.svg" width="100%" alt="Fin Read — Android finance tracker in Kotlin that extracts SMS transactions into a Room database and syncs idempotently to Supabase — fully usable without a network." /></a></td>
-    <td width="50%"><a href="https://blogs.omthakur.in"><img src="./assets/project-gitfool.svg" width="100%" alt="GitFool — Edge-rendered publication engine that compiles markdown straight from GitHub repositories via webhooks — sub-30 ms TTFB and 100/100 Lighthouse scores." /></a></td>
-  </tr>
 </table>
 
-<br />
+<p align="center">
+  <a href="https://omthakur.in"><b>Explore all production systems, open-source tools & blueprints on omthakur.in ↗</b></a>
+</p>
 
-<a href="https://omthakur.in">
-  <img src="./assets/project-monograph.svg" width="100%" alt="The full monograph — Read the interactive engineering monograph at omthakur.in" />
-</a>
+---
 
-<br />
-
-<img src="./assets/chapter-04.svg" width="100%" alt="Chapter 04 — Technical Specimen" />
+### § 04 · Technical Specimen
 
 <img src="./assets/stack.svg" width="100%" alt="Technical Specimen — Languages & Protocols: TypeScript, Python, Kotlin, SQL, WebSockets. Backend & Concurrency: Node.js, Deno, Pipecat, CUDA streams, Flexbase queues, HMAC-SHA256. Databases & Storage: PostgreSQL, Supabase, Drizzle ORM, Qdrant, Redis, SQLite." />
 
-<br />
+---
 
-<img src="./assets/chapter-05.svg" width="100%" alt="Chapter 05 — Career Chronology" />
+### § 05 · Career Chronology
 
 <a href="https://omthakur.in/resume">
   <img src="./assets/experience.svg" width="100%" alt="Krishora Technologies (Apr 2026 – present), CIARL (Aug 2025 – Apr 2026), Sumeru Technology Solutions (Aug 2024 – Feb 2025), Bhimrao Pradhan College (Jun – Aug 2024)." />
 </a>
 
-<br />
+---
 
-<img src="./assets/chapter-06.svg" width="100%" alt="Chapter 06 — Live Telemetry" />
+### § 06 · Live Telemetry
 
 <img src="./assets/telemetry.svg" width="100%" alt="Repository Telemetry & Language Specimen — 51+ Public Repositories, 5+ Years on GitHub, TypeScript, JavaScript, Python, Kotlin" />
-
-<br /><br />
-
-<p align="center">
-  <img src="https://streak-stats.demolab.com/?user=MonsterFlick&background=FAF6F1&border=D4C3AF&stroke=E2D5C6&ring=9E3D2B&fire=9E3D2B&currStreakNum=1A1816&sideNums=1A1816&currStreakLabel=9E3D2B&sideLabels=5A524A&dates=5A524A&border_radius=10" width="490" alt="Contribution streak" />
-</p>
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/MonsterFlick/MonsterFlick/output/github-snake.svg" width="100%" alt="Contribution grid being read by a terracotta snake" />
 </p>
 
-<br />
+---
 
-<img src="./assets/chapter-07.svg" width="100%" alt="Chapter 07 — Correspondence" />
+### § 07 · Correspondence
 
 <p align="center">
-  Have a distributed-systems problem, an agency project for SoWeBuild, a founding role, or just a good queue story?<br />
+  Have a distributed-systems problem, an agency project for SoWeBuild, or a founding role?<br />
   <b>Write to me — letters are always answered.</b>
 </p>
 
