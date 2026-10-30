@@ -57,12 +57,10 @@ text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helve
 .draw { animation: draw 1.6s cubic-bezier(.22, 1, .36, 1) forwards; }
 .fade { animation: fade 1.1s cubic-bezier(.22, 1, .36, 1) both; }
 .rise { animation: rise 1.1s cubic-bezier(.22, 1, .36, 1) both; }
-.pulse { animation: pulse 2.6s ease-in-out infinite; }
 
 @keyframes draw { from { stroke-dashoffset: var(--len, 600); } to { stroke-dashoffset: 0; } }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .55; transform: scale(.93); } }
 `;
 
 const svg = (w, h, desc, body, extraCss = "") =>
@@ -233,7 +231,7 @@ function buildHeader() {
     // Top banner
     t(36, 42, "OM THAKUR", { cls: "serif rise", size: 14, weight: 800, ls: 3, fill: C.ink }) +
     t(168, 42, "ENGINEERING MONOGRAPH", { cls: "mono rise", size: 11, weight: 700, ls: 2.2, fill: C.terracotta, style: delay(0.1) }) +
-    diamond(356, 38, 6, C.terracotta, "pulse") +
+    diamond(356, 38, 6, C.terracotta) +
     t(374, 42, "VOLUME I · MMXXVI", { cls: "mono rise", size: 11, weight: 600, ls: 2, fill: C.muted, style: delay(0.2) }) +
     ping(1088, 38, C.olive, 4) +
     t(1104, 42, "LIVE MONOGRAPH", { cls: "mono", size: 10.5, weight: 700, ls: 1.6, fill: C.olive }) +
@@ -332,7 +330,7 @@ function buildHeader() {
 }
 
 // ─────────────────────────────────────────────────────────────
-//  2. CHAPTER HEADINGS
+//  2. CHAPTER HEADINGS (Clean, stable typography, NO moving dots)
 // ─────────────────────────────────────────────────────────────
 const CHAPTERS = [
   { num: "01", title: "Preface", sub: "Who is writing this volume", page: "03" },
@@ -348,11 +346,9 @@ function buildChapter({ num, title, sub, page }) {
   const W = 1200;
   const H = 108;
   const kicker = `CHAPTER ${num}`;
-  const kW = monoW(kicker, 12, 3);
   const body =
     frame(W, H) +
     t(36, 42, kicker, { cls: "mono rise", size: 12, weight: 700, ls: 3, fill: C.terracotta }) +
-    diamond(36 + kW + 10, 38, 6, C.terracotta, "pulse") +
     t(1164, 42, `PAGE ${page}`, { cls: "mono fade", size: 11, weight: 600, ls: 2.4, fill: C.muted, anchor: "end", style: delay(0.3) }) +
     t(34, 82, title, { cls: "serif rise", size: 34, weight: 800, ls: -0.4, style: delay(0.12) }) +
     t(1164, 82, sub, { cls: "serif fade", size: 18, italic: true, fill: C.muted, anchor: "end", style: delay(0.45) }) +
@@ -629,84 +625,99 @@ function buildMonographCard() {
 }
 
 // ─────────────────────────────────────────────────────────────
-//  5. TECHNICAL SPECIMEN (stack)
+//  5. TECHNICAL SPECIMEN (stack — 3 spacious columns, no overlap)
 // ─────────────────────────────────────────────────────────────
 function buildStack() {
   const W = 1200;
-  const H = 404;
+  const H = 490;
   const cols = [
     {
-      kicker: "LANGUAGES",
-      title: "Languages & Protocols",
-      note: "CORE STACK",
-      items: ["TypeScript · JavaScript", "Python", "Kotlin", "SQL", "Bash · PowerShell", "WebSockets · REST"],
+      kicker: "LANGUAGES & PROTOCOLS",
+      title: "Languages & Core",
+      note: "PRIMARY RUNTIMES",
+      items: [
+        "TypeScript · JavaScript",
+        "Python (Async & CUDA)",
+        "Kotlin (Android)",
+        "SQL (PostgreSQL & SQLite)",
+        "Bash & PowerShell",
+        "WebSockets · HTTP/3 & REST",
+      ],
     },
     {
-      kicker: "CONCURRENCY",
-      title: "Backend & Concurrency",
+      kicker: "BACKEND & CONCURRENCY",
+      title: "Distributed Architecture",
       note: "15 MIN → 4 S SYNC",
-      items: ["Node.js · Deno", "Pipecat · CUDA streams", "Flexbase message queues", "Webhooks · HMAC-SHA256", "RBAC · AES-256-GCM", "Matrix real-time"],
+      items: [
+        "Node.js · Deno Runtime",
+        "Pipecat · GPU Voice Streams",
+        "Flexbase Message Queues",
+        "HMAC-SHA256 & Webhooks",
+        "AES-256-GCM Entitlements",
+        "Matrix Protocol (VoIP & Chat)",
+      ],
     },
     {
-      kicker: "STORAGE",
-      title: "Databases & Storage",
-      note: "PRIMARY DATA LAYER",
-      items: ["PostgreSQL", "Supabase · RLS", "Drizzle ORM", "Qdrant · RAG", "Redis", "SQLite · Room"],
-    },
-    {
-      kicker: "INFRASTRUCTURE",
-      title: "Infrastructure & Cloud",
-      note: "SELF-HOSTED INFRA",
-      items: ["Docker", "Linux · Nginx · PM2", "Next.js Edge Runtime", "Deno Edge Functions", "Cloudflare", "Ollama · local LLMs"],
+      kicker: "DATABASES & STORAGE",
+      title: "Data Layer & Persistence",
+      note: "ZERO CRASH DATA LAYER",
+      items: [
+        "PostgreSQL (Production)",
+        "Supabase · Row-Level Security",
+        "Qdrant Vector Database",
+        "Redis (Pub/Sub & Caching)",
+        "Drizzle ORM & Migrations",
+        "SQLite · Android Room DB",
+      ],
     },
   ];
 
-  const X0 = 276;
-  const CW = 228;
+  const X0 = 296;
+  const CW = 290;
   const colSvg = cols
     .map((c, ci) => {
       const x = X0 + ci * CW;
       const base = 0.25 + ci * 0.15;
       return (
-        (ci > 0 ? line(x - 16, 44, x - 16, 372, C.parchment, { width: 1, dash: "2 5" }) : "") +
+        (ci > 0 ? line(x - 18, 44, x - 18, 452, C.parchment, { width: 1, dash: "2 5" }) : "") +
         `<g class="rise" style="${delay(base)}">` +
-        t(x, 60, c.kicker, { cls: "mono", size: 10.5, weight: 700, ls: 2, fill: C.terracotta }) +
-        t(x, 88, c.title, { cls: "serif", size: 19, weight: 800 }) +
+        t(x, 64, c.kicker, { cls: "mono", size: 11, weight: 700, ls: 2, fill: C.terracotta }) +
+        t(x, 94, c.title, { cls: "serif", size: 21, weight: 800 }) +
         `</g>` +
-        line(x, 104, x + 196, 104, C.parchment, { width: 1.2, drawDelay: base }) +
-        line(x, 104, x + 30, 104, C.terracotta, { width: 2.5, drawDelay: base + 0.2 }) +
+        line(x, 110, x + 240, 110, C.parchment, { width: 1.2, drawDelay: base }) +
+        line(x, 110, x + 36, 110, C.terracotta, { width: 2.5, drawDelay: base + 0.2 }) +
         c.items
           .map(
             (it, i) =>
-              `<g class="rise" style="${delay(base + 0.25 + i * 0.08)}">` +
-              diamond(x + 4, 136 + i * 38 - 5, 6, i % 2 ? C.olive : C.terracotta) +
-              t(x + 18, 136 + i * 38, it, { size: 15, fill: C.charcoal }) +
+              `<g class="rise" style="${delay(base + 0.22 + i * 0.07)}">` +
+              diamond(x + 5, 144 + i * 46 - 5, 6, i % 2 ? C.olive : C.terracotta) +
+              t(x + 22, 144 + i * 46, it, { size: 15.5, weight: 500, fill: C.charcoal }) +
               `</g>`
           )
           .join("") +
-        t(x, 368, c.note, { cls: "mono fade", size: 10, weight: 700, ls: 1.6, fill: C.muted, style: delay(base + 0.8) })
+        t(x, 444, c.note, { cls: "mono fade", size: 11, weight: 700, ls: 1.6, fill: C.muted, style: delay(base + 0.8) })
       );
     })
     .join("");
 
   const body =
     frame(W, H) +
-    `<rect x="24" y="24" width="222" height="356" rx="8" fill="${C.ivory}" stroke="${C.parchment}"/>` +
-    t(44, 56, "TYPE SPECIMEN", { cls: "mono fade", size: 10.5, weight: 700, ls: 2, fill: C.terracotta }) +
-    t(40, 198, "Aa", { cls: "serif rise", size: 128, weight: 900, ls: -3, style: delay(0.1) }) +
-    t(44, 238, "Backend & Systems", { cls: "serif rise", size: 20, italic: true, fill: C.terracotta, style: delay(0.25) }) +
-    line(44, 256, 226, 256, C.rule, { width: 1, drawDelay: 0.3 }) +
-    t(44, 282, "ABCDEFGHIJKLM", { cls: "mono fade", size: 12, weight: 600, ls: 2.2, fill: C.ink, style: delay(0.4) }) +
-    t(44, 302, "nopqrstuvwxyz", { cls: "mono fade", size: 12, weight: 600, ls: 2.2, fill: C.ink, style: delay(0.5) }) +
-    t(44, 322, "0123456789 {} → λ", { cls: "mono fade", size: 12, weight: 600, ls: 1.2, fill: C.terracotta, style: delay(0.6) }) +
-    t(44, 362, "SPECIMEN Nº 08", { cls: "mono fade", size: 10, weight: 700, ls: 2, fill: C.muted, style: delay(0.7) }) +
+    `<rect x="28" y="28" width="236" height="434" rx="8" fill="${C.ivory}" stroke="${C.parchment}"/>` +
+    t(48, 62, "TYPE SPECIMEN", { cls: "mono fade", size: 11, weight: 700, ls: 2, fill: C.terracotta }) +
+    t(44, 218, "Aa", { cls: "serif rise", size: 136, weight: 900, ls: -3, style: delay(0.1) }) +
+    t(48, 262, "Backend & Systems", { cls: "serif rise", size: 21, italic: true, fill: C.terracotta, style: delay(0.25) }) +
+    line(48, 280, 236, 280, C.rule, { width: 1, drawDelay: 0.3 }) +
+    t(48, 308, "ABCDEFGHIJKLM", { cls: "mono fade", size: 12.5, weight: 600, ls: 2.2, fill: C.ink, style: delay(0.4) }) +
+    t(48, 332, "nopqrstuvwxyz", { cls: "mono fade", size: 12.5, weight: 600, ls: 2.2, fill: C.ink, style: delay(0.5) }) +
+    t(48, 356, "0123456789 {} → λ", { cls: "mono fade", size: 12.5, weight: 600, ls: 1.2, fill: C.terracotta, style: delay(0.6) }) +
+    t(48, 440, "SPECIMEN Nº 04", { cls: "mono fade", size: 11, weight: 700, ls: 2, fill: C.muted, style: delay(0.7) }) +
     colSvg;
 
-  write("stack.svg", svg(W, H, "Technical specimen — languages, backend, databases and infrastructure", body));
+  write("stack.svg", svg(W, H, "Technical specimen — languages, backend concurrency and databases", body));
 }
 
 // ─────────────────────────────────────────────────────────────
-//  6. CAREER CHRONOLOGY (Corrected April dates, NO month counts)
+//  6. CAREER CHRONOLOGY (Corrected April dates, NO month counts, fixed PRESENT dot)
 // ─────────────────────────────────────────────────────────────
 function buildExperience() {
   const entries = [
@@ -755,12 +766,13 @@ function buildExperience() {
         ? ping(64, y + 8, C.olive, 6.5)
         : `<circle cx="64" cy="${y + 8}" r="7" fill="${C.card}" stroke="${C.terracotta}" stroke-width="2.5"/><circle cx="64" cy="${y + 8}" r="2.8" fill="${C.terracotta}"/>`;
 
+      // Clean, fixed green badge on the right with a perfectly centered status dot (NO jitter/pulse)
       let badgeMarkup = "";
       if (e.current && e.tag) {
         const tagW = monoW(e.tag, 11, 1.4) + 36;
         badgeMarkup =
           `<rect x="${(1164 - tagW).toFixed(0)}" y="${y - 6}" width="${tagW.toFixed(0)}" height="26" rx="13" fill="${C.olive}" fill-opacity=".12"/>` +
-          `<circle cx="${(1164 - tagW + 15).toFixed(0)}" cy="${y + 7}" r="3.5" fill="${C.olive}" class="pulse"/>` +
+          `<circle cx="${(1164 - tagW + 16).toFixed(0)}" cy="${y + 7}" r="3.5" fill="${C.olive}"/>` +
           t(1164 - 14, y + 11, e.tag, {
             cls: "mono",
             size: 11,
@@ -811,7 +823,7 @@ function buildTelemetry() {
     frame(W, H) +
     // Top banner
     t(36, 42, "CHAPTER 06 · LIVE TELEMETRY", { cls: "mono rise", size: 12, weight: 700, ls: 3, fill: C.terracotta }) +
-    diamond(266, 38, 6, C.terracotta, "pulse") +
+    diamond(266, 38, 6, C.terracotta) +
     t(282, 42, "CODEBASE SIGNALS & REPOSITORY SPECIMEN", { cls: "mono rise", size: 11, weight: 600, ls: 2, fill: C.muted }) +
     ping(1088, 38, C.olive, 4) +
     t(1104, 42, "LIVE REPOS: 51", { cls: "mono", size: 10.5, weight: 700, ls: 1.6, fill: C.olive }) +
@@ -892,7 +904,7 @@ function buildTelemetry() {
 }
 
 // ─────────────────────────────────────────────────────────────
-//  8. COLOPHON
+//  8. COLOPHON (Static ornamental divider, perfectly aligned, NO jitter)
 // ─────────────────────────────────────────────────────────────
 function buildColophon() {
   const W = 1200;
@@ -904,9 +916,9 @@ function buildColophon() {
 `;
   const body =
     frame(W, H) +
-    line(462, 48, 584, 48, C.rule, { width: 1.2, drawDelay: 0.1 }) +
-    diamond(600, 48, 8, C.terracotta, "pulse") +
-    line(616, 48, 738, 48, C.rule, { width: 1.2, drawDelay: 0.1 }) +
+    line(450, 48, 584, 48, C.rule, { width: 1.2, drawDelay: 0.1 }) +
+    diamond(600, 48, 7, C.terracotta) +
+    line(616, 48, 750, 48, C.rule, { width: 1.2, drawDelay: 0.1 }) +
     t(600, 86, "COLOPHON", { cls: "mono fade", size: 11, weight: 700, ls: 4, fill: C.terracotta, anchor: "middle" }) +
     `<text x="600" y="158" class="serif sig" font-size="58" font-weight="700" font-style="italic" text-anchor="middle" fill="${C.terracotta}" stroke="${C.terracotta}" stroke-width="1.1">Om Thakur</text>` +
     t(600, 198, "Set in Playfair Display & Geist Mono  ·  Composed in Mumbai  ·  Edition MMXXVI", {
@@ -1035,7 +1047,7 @@ ${projectRow(PROJECTS[0], PROJECTS[1])}${projectRow(PROJECTS[2], PROJECTS[3])}${
 
 <img src="./assets/chapter-04.svg" width="100%" alt="Chapter 04 — Technical Specimen" />
 
-<img src="./assets/stack.svg" width="100%" alt="Stack — Languages: TypeScript, Python, Kotlin, SQL. Backend: Node.js, Deno, Pipecat, Flexbase queues. Databases: PostgreSQL, Supabase, Qdrant, Redis. Infrastructure: Docker, Linux, Nginx, Edge runtimes, Cloudflare." />
+<img src="./assets/stack.svg" width="100%" alt="Technical Specimen — Languages & Protocols: TypeScript, Python, Kotlin, SQL, WebSockets. Backend & Concurrency: Node.js, Deno, Pipecat, CUDA streams, Flexbase queues, HMAC-SHA256. Databases & Storage: PostgreSQL, Supabase, Drizzle ORM, Qdrant, Redis, SQLite." />
 
 <br />
 

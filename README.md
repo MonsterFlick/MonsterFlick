@@ -81,7 +81,7 @@ const om = {
 
 <img src="./assets/chapter-04.svg" width="100%" alt="Chapter 04 — Technical Specimen" />
 
-<img src="./assets/stack.svg" width="100%" alt="Stack — Languages: TypeScript, Python, Kotlin, SQL. Backend: Node.js, Deno, Pipecat, Flexbase queues. Databases: PostgreSQL, Supabase, Qdrant, Redis. Infrastructure: Docker, Linux, Nginx, Edge runtimes, Cloudflare." />
+<img src="./assets/stack.svg" width="100%" alt="Technical Specimen — Languages & Protocols: TypeScript, Python, Kotlin, SQL, WebSockets. Backend & Concurrency: Node.js, Deno, Pipecat, CUDA streams, Flexbase queues, HMAC-SHA256. Databases & Storage: PostgreSQL, Supabase, Drizzle ORM, Qdrant, Redis, SQLite." />
 
 <br />
 
