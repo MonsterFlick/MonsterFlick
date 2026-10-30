@@ -145,31 +145,23 @@ function buildHeader() {
   const W = 1200;
   const H = 484;
 
-  const typed = "$ whoami → Founding Software Engineer @ Krishora Technologies";
-  const charW = 9;
-  const n = typed.length;
-  const steps = Array.from({ length: n + 1 }, (_, i) => (i * charW).toFixed(1)).join(";");
-  const caretSteps = Array.from({ length: n + 1 }, (_, i) => (52 + i * charW).toFixed(1)).join(";");
-  const typeDur = (n * 0.045).toFixed(2);
-
   const chips = [
-    { big: "15m → 4s", small: "queue sync" },
-    { big: "~700 ms", small: "voice pipeline" },
-    { big: "SoWeBuild", small: "agency studio" },
+    { big: "15m → 4s", small: "QUEUE SYNC", w: 204 },
+    { big: "~700 ms", small: "VOICE PIPELINE", w: 228 },
+    { big: "SoWeBuild", small: "AGENCY STUDIO", w: 238 },
   ];
   let cx = 52;
   const chipSvg = chips
     .map((c, i) => {
-      const bigW = c.big.length * 17 * 0.56;
-      const smallW = monoW(c.small, 11, 0.6);
-      const w = 14 + bigW + 10 + smallW + 16;
       const g =
-        `<g class="rise" style="${delay(1.6 + i * 0.15)}">` +
-        `<rect x="${cx}" y="398" width="${w.toFixed(0)}" height="36" rx="7" fill="${C.card}" stroke="${C.parchment}" stroke-width="1.2"/>` +
-        t(cx + 14, 422, c.big, { cls: "serif", size: 17, weight: 800, fill: C.terracotta }) +
-        t(cx + 14 + bigW + 10, 421, c.small.toUpperCase(), { cls: "mono", size: 11, fill: C.muted, weight: 600, ls: 0.6 }) +
+        `<g class="rise" style="${delay(1.5 + i * 0.12)}">` +
+        `<rect x="${cx}" y="396" width="${c.w}" height="38" rx="7" fill="${C.card}" stroke="${C.parchment}" stroke-width="1.2"/>` +
+        `<text x="${cx + 16}" y="420">` +
+        `<tspan class="serif" font-size="16" font-weight="800" fill="${C.terracotta}">${c.big}</tspan>` +
+        `<tspan dx="10" class="mono" font-size="10.5" font-weight="600" fill="${C.muted}" letter-spacing="0.6">${c.small}</tspan>` +
+        `</text>` +
         `</g>`;
-      cx += w + 12;
+      cx += c.w + 12;
       return g;
     })
     .join("");
@@ -189,7 +181,7 @@ function buildHeader() {
 
   const bars = [0.92, 0.68, 0.84, 0.45, 0.76]
     .map((pct, i) => {
-      const y = 188 + i * 14;
+      const y = 192 + i * 14;
       const bw = (pageW - 48) * pct;
       return (
         `<rect x="948" y="${y}" width="${pageW - 48}" height="7" rx="3.5" fill="${C.ivory}"/>` +
@@ -201,19 +193,9 @@ function buildHeader() {
     .join("");
 
   const css = `
-.leaf { transform-origin: ${spine}px ${top}px; transform-box: fill-box; animation: turn 7.5s cubic-bezier(.45, 0, .25, 1) infinite; }
-.leafShade { animation: shade 7.5s cubic-bezier(.45, 0, .25, 1) infinite; }
+.blink { animation: blink 1.1s step-end infinite; }
 .ribbon { transform-origin: 1112px ${top}px; animation: flutter 5s ease-in-out infinite; }
-@keyframes turn {
-  0%, 18%   { transform: rotateY(0deg) skewY(0deg); }
-  42%, 68%  { transform: rotateY(-172deg) skewY(-2deg); }
-  92%, 100% { transform: rotateY(0deg) skewY(0deg); }
-}
-@keyframes shade {
-  0%, 18%   { opacity: 0; }
-  30%, 55%  { opacity: .28; }
-  72%, 100% { opacity: 0; }
-}
+@keyframes blink { 0%, 45% { opacity: 1; } 50%, 100% { opacity: 0; } }
 @keyframes flutter {
   0%, 100% { transform: rotate(0deg); }
   50%      { transform: rotate(2.8deg); }
@@ -226,7 +208,6 @@ function buildHeader() {
       <linearGradient id="spineL" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#2C2318" stop-opacity=".25"/><stop offset="1" stop-color="#2C2318" stop-opacity="0"/></linearGradient>
       <linearGradient id="spineR" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2C2318" stop-opacity=".3"/><stop offset="1" stop-color="#2C2318" stop-opacity="0"/></linearGradient>
       <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6"/></filter>
-      <clipPath id="typeClip"><rect x="52" y="318" width="${charW * n}" height="26"/></clipPath>
     </defs>` +
     // Top banner
     t(36, 42, "OM THAKUR", { cls: "serif rise", size: 14, weight: 800, ls: 3, fill: C.ink }) +
@@ -256,14 +237,13 @@ function buildHeader() {
       fill: C.terracotta,
       style: delay(0.8),
     }) +
-    // Typed line
-    `<g clip-path="url(#typeClip)">` +
-    `<text x="52" y="334" class="mono" font-size="15" fill="${C.body}"><tspan fill="${C.terracotta}" font-weight="700">$</tspan>${esc(
-      typed.slice(1)
-    )}</text></g>` +
-    `<rect x="52" y="320" width="8.5" height="18" rx="1" fill="${C.terracotta}">` +
-    `<animate attributeName="x" values="${caretSteps}" dur="${typeDur}s" begin="1.4s" fill="freeze" calcMode="discrete"/>` +
-    `<animate attributeName="opacity" values="1;1;0;0" dur="1s" repeatCount="indefinite"/></rect>` +
+    // Typed line with anchored inline blinking caret
+    `<g class="rise" style="${delay(1.0)}">` +
+    `<text x="52" y="334" class="mono" font-size="14.5" fill="${C.body}">` +
+    `<tspan fill="${C.terracotta}" font-weight="700">$ </tspan>` +
+    `whoami <tspan fill="${C.terracotta}">→</tspan> Founding Software Engineer @ Krishora Technologies` +
+    `<tspan fill="${C.terracotta}" class="blink" font-weight="700"> ▋</tspan>` +
+    `</text></g>` +
     // Location / availability
     `<g class="rise" style="${delay(1.25)}">` +
     ping(58, 375, C.olive, 3.5, "0.6s") +
@@ -297,20 +277,15 @@ function buildHeader() {
     `<rect x="${spine}" y="${top}" width="${pageW}" height="${pageH}" rx="3" fill="${C.card}" stroke="${C.sand}"/>` +
     t(948, 136, "CHAPTER 04", { cls: "mono", size: 10, weight: 700, ls: 2, fill: C.terracotta }) +
     t(948, 164, "Telemetry", { cls: "serif", size: 22, weight: 800 }) +
-    line(948, 262, 1128, 262, C.rule, { width: 1 }) +
+    line(948, 176, 1108, 176, C.parchment, { width: 1.2 }) +
     bars +
-    lines(948, [282, 294, 306, 318, 330], [176, 150, 168, 130, 90]) +
+    line(948, 270, 1108, 270, C.parchment, { width: 1, dash: "2 4" }) +
+    lines(948, [286, 298, 310, 322, 334], [160, 140, 155, 120, 85]) +
     t(1038, 364, "— 15 —", { cls: "mono", size: 9, fill: C.muted, anchor: "middle" }) +
     `<rect x="${spine}" y="${top}" width="46" height="${pageH}" fill="url(#spineR)"/>` +
     line(spine, top, spine, top + pageH, C.rule, { width: 1 }) +
     // Bookmark ribbon
     `<path class="ribbon" d="M1106 ${top - 4} h14 v74 l-7 -8 l-7 8 z" fill="${C.terracotta}"/>` +
-    // Turning leaf
-    `<g class="leaf">` +
-    `<rect x="${spine}" y="${top}" width="${pageW}" height="${pageH}" rx="3" fill="${C.card}" stroke="${C.sand}"/>` +
-    lines(948, [136, 160, 182, 194, 206, 218, 240, 252, 264, 286, 298, 310, 330], [150, 176, 160, 170, 120, 176]) +
-    `<rect class="leafShade" x="${spine}" y="${top}" width="${pageW}" height="${pageH}" rx="3" fill="#3A2B14"/>` +
-    `</g>` +
     `</g>` +
     // Footer
     line(36, 448, 1164, 448, C.parchment, { drawDelay: 0.4 }) +
